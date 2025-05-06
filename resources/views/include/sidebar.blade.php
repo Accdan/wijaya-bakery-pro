@@ -32,6 +32,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ route('role.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-user-shield"></i>
+                        <p>Peran Pengguna</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ url('resep') }}" class="nav-link">
                         <i class="nav-icon fas fa-utensils"></i>
                         <p>Kelola Resep</p>
@@ -69,3 +76,45 @@
         </nav>
     </div>
 </aside>
+<style>
+    .main-sidebar {
+        background-color: #2d3d56;
+    }
+
+    .user-panel {
+        background: #4e5d77;
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    .user-panel .image img {
+        border-radius: 50%;
+        border: 2px solid #fff;
+    }
+
+    .nav-sidebar .nav-item:hover {
+        background-color: #6c7d94;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .nav-sidebar .nav-link:hover .nav-icon {
+        color: #ffcc00;
+    }
+
+    .nav-sidebar .nav-link .nav-icon {
+        font-size: 18px;
+        color: #f1f1f1;
+        transition: color 0.3s ease;
+    }
+
+    .nav-sidebar .nav-item.active > .nav-link {
+        background-color: #4e73df;
+        color: white;
+    }
+
+    .nav-sidebar .nav-link {
+        padding: 12px 15px;
+        font-size: 16px;
+    }
+</style>

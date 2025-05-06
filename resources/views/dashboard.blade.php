@@ -20,54 +20,6 @@
         .fc-daygrid-day {
             border: none !important;
         }
-        /* Styling sidebar background */
-.main-sidebar {
-    background-color: #2d3d56; /* Dark Blue Sidebar */
-}
-
-/* Styling user panel */
-.user-panel {
-    background: #4e5d77; /* Darker Shade for User Panel */
-    padding: 15px;
-    border-radius: 8px;
-}
-
-.user-panel .image img {
-    border-radius: 50%;
-    border: 2px solid #fff;
-}
-
-/* Hover effect on menu items */
-.nav-sidebar .nav-item:hover {
-    background-color: #6c7d94;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-/* Hover icon color change */
-.nav-sidebar .nav-link:hover .nav-icon {
-    color: #ffcc00;
-}
-
-/* Icon styling */
-.nav-sidebar .nav-link .nav-icon {
-    font-size: 18px; /* Enlarging icons */
-    color: #f1f1f1;
-    transition: color 0.3s ease;
-}
-
-/* Active item */
-.nav-sidebar .nav-item.active > .nav-link {
-    background-color: #4e73df;
-    color: white;
-}
-
-/* Adjust padding and spacing */
-.nav-sidebar .nav-link {
-    padding: 12px 15px;
-    font-size: 16px;
-}
-
     </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -80,12 +32,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard</h1>
+                        <h1 class="m-0">Dashboard Admin</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="{{ url('dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard</li>
+                            <li class="breadcrumb-item active">Dashboard Admin</li>
                         </ol>
                     </div>
                 </div>
