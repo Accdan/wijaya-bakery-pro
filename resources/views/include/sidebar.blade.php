@@ -39,6 +39,13 @@
                 </li>
 
                 <li class="nav-item">
+                    <a href="{{ url('pengguna') }}" class="nav-link">
+                        <i class="nav-icon fas fa-users-cog"></i>
+                        <p>Pengguna</p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a href="{{ url('resep') }}" class="nav-link">
                         <i class="nav-icon fas fa-utensils"></i>
                         <p>Kelola Resep</p>
