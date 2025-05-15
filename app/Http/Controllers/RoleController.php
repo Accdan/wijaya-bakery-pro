@@ -61,9 +61,19 @@ class RoleController extends Controller
 
     public function toggleStatus($id)
     {
-        $role = Role::findOrFail($id);
-        $role->toggleStatus();
+        try {
+            $role = Role::findOrFail($id);
+            $role->toggleStatus();
 
-        return redirect()->route('role.index')->with('success', 'Status role diperbarui.');
+            return response()->json([
+                'success' => true,
+                'message' => 'Status role berhasil diperbarui.'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal memperbarui status.'
+            ], 500);
+        }
     }
 }

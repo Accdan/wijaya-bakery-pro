@@ -47,17 +47,30 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <!-- Total Resep -->
                     <div class="col-lg-3 col-6">
-                        <div class="small-box bg-info">
+                        <div class="small-box bg-warning">
                             <div class="inner">
-                                <h3>{{ $totalResep ?? 0 }}</h3>
-                                <p>Total Resep</p>
+                                <h3>{{ $totalPeran ?? 0 }}</h3>
+                                <p>Total Peran</p>
                             </div>
                             <div class="icon">
-                                <i class="fas fa-utensils"></i>
+                                <i class="fas fa-user-tag"></i>
                             </div>
-                            <a href="{{ url('resep') }}" class="small-box-footer">Lihat Detail <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="{{ url('role') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Total Pengguna -->
+                    <div class="col-lg-3 col-6">
+                        <div class="small-box bg-primary">
+                            <div class="inner">
+                                <h3>{{ $totalPengguna ?? 0 }}</h3>
+                                <p>Pengguna Aktif</p>
+                            </div>
+                            <div class="icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <a href="{{ url('pengguna') }}" class="small-box-footer">Lihat Detail <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
 
@@ -75,31 +88,17 @@
                         </div>
                     </div>
 
-                    <!-- Total Bahan -->
+                    <!-- Total Resep -->
                     <div class="col-lg-3 col-6">
-                        <div class="small-box bg-warning text-white">
+                        <div class="small-box bg-info">
                             <div class="inner">
-                                <h3>{{ $totalBahan ?? 0 }}</h3>
-                                <p>Bahan Masakan</p>
+                                <h3>{{ $totalResep ?? 0 }}</h3>
+                                <p>Total Resep</p>
                             </div>
                             <div class="icon">
-                                <i class="fas fa-carrot"></i>
+                                <i class="fas fa-utensils"></i>
                             </div>
-                            <a href="{{ url('bahan') }}" class="small-box-footer text-white">Lihat Detail <i class="fas fa-arrow-circle-right"></i></a>
-                        </div>
-                    </div>
-
-                    <!-- Total Pengguna -->
-                    <div class="col-lg-3 col-6">
-                        <div class="small-box bg-primary">
-                            <div class="inner">
-                                <h3>{{ $totalPengguna ?? 0 }}</h3>
-                                <p>Pengguna Aktif</p>
-                            </div>
-                            <div class="icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <a href="{{ url('pengguna') }}" class="small-box-footer">Lihat Detail <i class="fas fa-arrow-circle-right"></i></a>
+                            <a href="{{ url('resep') }}" class="small-box-footer">Lihat Detail <i class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
                 </div>
