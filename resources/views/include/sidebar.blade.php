@@ -39,7 +39,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ url('pengguna') }}" class="nav-link">
+                    <a href="{{ url('user') }}" class="nav-link">
                         <i class="nav-icon fas fa-users-cog"></i>
                         <p>Pengguna</p>
                     </a>
