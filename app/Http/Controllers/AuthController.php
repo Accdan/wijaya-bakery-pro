@@ -48,7 +48,16 @@ class AuthController extends Controller
             'email' => 'nullable|email|max:255|unique:users',
             'no_telepon' => 'nullable|string|max:20',
             'password' => 'required|string|min:6|confirmed',
+            'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
+
+        $filename = null;
+
+        if ($request->hasFile('profile_picture')) {
+            $file = $request->file('profile_picture');
+            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/profile'), $filename);
+        }
 
         $user = User::create([
             'name' => $request->name,
@@ -56,12 +65,14 @@ class AuthController extends Controller
             'email' => $request->email,
             'no_telepon' => $request->no_telepon,
             'password' => Hash::make($request->password),
-            'role_id' => 'default-role-id', // bisa diganti sesuai kebutuhan
+            'profile_picture' => $filename,
+            'role_id' => '6fe4ee1b-943d-4ee3-afdd-f77364cca715',
         ]);
 
-        Auth::login($user);
+        // Auth::login($user);
 
-        return redirect('/dashboard')->with('success', 'Registrasi berhasil!');
+        //return redirect('/login')->with('success', 'Registrasi berhasil!');
+        return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan login.');
     }
 
     public function logout(Request $request)

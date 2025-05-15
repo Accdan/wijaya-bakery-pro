@@ -10,7 +10,7 @@
 
     {{-- Background --}}
     <div class="bg-image d-flex align-items-center justify-content-center min-vh-100"
-         style="background-image: url('{{ asset('image/labuanbajo.jpg') }}');
+         style="background-image: url('{{ asset('image/resepbg.jpg') }}');
                 background-size: cover;
                 background-position: center;">
 
@@ -78,10 +78,22 @@
                 </div>
             </div>
         </div>
-
     </div>
 
+    @include('services.ToastModalUser')
+
     {{-- Bootstrap JS --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            @if (session('success') || session('error'))
+                $('#toastNotification').toast({
+                    delay: 3000,
+                    autohide: true
+                }).toast('show');
+            @endif
+        });
+    </script>
 </body>
 </html>

@@ -8,7 +8,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">Kontak</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('login') }}">Login</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Register</a></li>
             </ul>
         </div>
