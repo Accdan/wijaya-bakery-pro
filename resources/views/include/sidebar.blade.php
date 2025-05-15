@@ -7,7 +7,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- User Info -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
+        {{-- <div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
             <div class="image">
                 <img src="{{ asset('uploads/profile_pictures/' . session('profile_picture', 'default.png')) }}"
                      class="img-circle elevation-2" alt="User Image" style="width: 45px; height: 45px; object-fit: cover;">
@@ -19,7 +19,7 @@
                     {{ session('role_name', 'Unknown') }}
                 </span>
             </div>
-        </div>
+        </div> --}}
 
         <!-- Menu -->
         <nav class="mt-2">
@@ -55,23 +55,23 @@
                 <li class="nav-item">
                     <a href="{{ url('kategori') }}" class="nav-link">
                         <i class="nav-icon fas fa-th-list"></i>
-                        <p>Kategori Makanan</p>
+                        <p>Kategori Resep</p>
                     </a>
                 </li>
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ url('bahan') }}" class="nav-link">
                         <i class="nav-icon fas fa-carrot"></i>
                         <p>Bahan Masakan</p>
                     </a>
-                </li>
+                </li> --}}
 
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a href="{{ url('pengguna') }}" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Pengguna</p>
                     </a>
-                </li>
+                </li> --}}
 
                 <li class="nav-item">
                     <a href="{{ url('pengaturan') }}" class="nav-link">
