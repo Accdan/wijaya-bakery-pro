@@ -14,7 +14,7 @@
             <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                 <li>
                     <a class="dropdown-item" href="{{ url('dashboard') }}">
-                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                        <i class="fas fa-tachometer-alt"></i> Dashboard test "ngecek push"
                     </a>
                 </li>
                 <li>
