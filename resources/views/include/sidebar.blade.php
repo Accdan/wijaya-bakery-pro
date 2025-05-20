@@ -46,7 +46,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="{{ url('resep') }}" class="nav-link">
+                    <a href="{{ url('menu') }}" class="nav-link">
                         <i class="nav-icon fas fa-utensils"></i>
                         <p>Kelola Resep</p>
                     </a>
