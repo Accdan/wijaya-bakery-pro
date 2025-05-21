@@ -73,6 +73,7 @@ class User extends Authenticatable
         ]);
     }
 
+
     public function deletePengguna()
     {
         return $this->delete();

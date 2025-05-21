@@ -1,0 +1,67 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+
+class Menu extends Model
+{
+    protected $table = 'menu';
+    protected $keyType = 'string';
+    public $incrementing = false;
+
+    protected $fillable = [
+        'id',
+        'nama_menu',
+        'deskripsi_menu',
+        'prosedur',
+        'gambar_menu',
+        'kategori_id',
+    ];
+
+    protected static function booted()
+    {
+        static::creating(function ($menu) {
+            if (!$menu->id) {
+                $menu->id = (string) Str::uuid();
+            }
+        });
+    }
+
+    // Relasi ke Kategori
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'kategori_id');
+    }
+
+    // Create Menu (static)
+    public static function createMenu($data)
+    {
+        return self::create([
+            'nama_menu'      => $data['nama_menu'],
+            'deskripsi_menu' => $data['deskripsi_menu'],
+            'prosedur'       => $data['prosedur'],
+            'gambar_menu'    => $data['gambar_menu'] ?? null,
+            'kategori_id'    => $data['kategori_id'],
+        ]);
+    }
+
+    // Update Menu
+    public function updateMenu($data)
+    {
+        return $this->update([
+            'nama_menu'      => $data['nama_menu'] ?? $this->nama_menu,
+            'deskripsi_menu' => $data['deskripsi_menu'] ?? $this->deskripsi_menu,
+            'prosedur'       => $data['prosedur'] ?? $this->prosedur,
+            'gambar_menu'    => $data['gambar_menu'] ?? $this->gambar_menu,
+            'kategori_id'    => $data['kategori_id'] ?? $this->kategori_id,
+        ]);
+    }
+
+    // Delete Menu
+    public function deleteMenu()
+    {
+        return $this->delete();
+    }
+}
