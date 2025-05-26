@@ -55,7 +55,7 @@
                         <div class="card-body">
                             <div class="row justify-content-center">
                                 <div class="col-12 col-md-4 text-center mb-3">
-                                    <img src="{{ $menu->gambar ? asset('storage/' . $menu->gambar) : asset('image/default-food.png') }}"
+                                    <img src="{{ $menu->gambar ? asset('public\uploads' . $menu->gambar) : asset('image/default-food.png') }}"
                                         class="menu-img img-fluid rounded" alt="Foto Menu">
                                 </div>
                                 <div class="col-12 col-md-8">
@@ -81,13 +81,13 @@
                                                 <th>Kategori</th>
                                                 <td>{{ $menu->kategori->nama_kategori ?? '-' }}</td>
                                             </tr>
-                                            <tr>
+                                            {{-- <tr>
                                                 <th>Foto Menu</th>
                                                 <td class="text-center">
-                                                    <img src="{{ $menu->gambar_menu ? asset('storage/' . $menu->gambar_menu) : asset('image/default-food.png') }}"
+                                                    <img src="{{ $menu->gambar_menu ? asset('public/' . $menu->gambar_menu) : asset('uploads/menu') }}"
                                                          class="menu-img img-fluid rounded" alt="Foto Menu">
                                                 </td>
-                                            </tr>
+                                            </tr> --}}
                                             <tr>
                                                 <th>Dibuat pada</th>
                                                 <td>{{ $menu->created_at->translatedFormat('d F Y H:i') }}</td>
