@@ -11,7 +11,6 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    // Jika kamu ingin primary key tipe string UUID
     protected $keyType = 'string';
     public $incrementing = false;
 
@@ -34,7 +33,6 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
-        // Kalau Laravel 9 ke atas, 'password' bisa otomatis di-hash via cast
         'password' => 'hashed',
     ];
 
@@ -47,7 +45,6 @@ class User extends Authenticatable
         });
     }
 
-    // Override supaya Laravel pakai 'username' sebagai identifier login
     public function getAuthIdentifierName()
     {
         return 'username';

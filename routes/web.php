@@ -17,13 +17,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/home', [HomeController::class, 'index']);
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::get('/login', [AuthController::class, 'showUserLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
+
+Route::get('/login-admin', [AuthController::class, 'showAdminLoginForm'])->name('login-admin');
+Route::post('/login-admin', [AuthController::class, 'adminLogin']);
+
 Route::resource('kategori', KategoriController::class);
 Route::resource('menu', MenuController::class);
-// Route::resource('pengguna', PenggunaController::class);
 
 // Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

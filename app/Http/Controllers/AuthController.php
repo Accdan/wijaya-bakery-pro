@@ -9,38 +9,41 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    // Tampilkan form login
-    public function showLoginForm()
+    public function showUserLoginForm()
     {
-        return view('auth.login');
+        return view('auth.login-user');
     }
 
-    // Proses login
-    public function login(Request $request)
+    public function userLogin(Request $request)
     {
         $request->validate([
             'username' => 'required|string',
             'password' => 'required|string',
         ]);
 
-        $credentials = $request->only('username', 'password');
+        $user = User::where('username', $request->username)->first();
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->intended('/dashboard');
+        if (!$user || $user->role_id !== '6fe4ee1b-943d-4ee3-afdd-f77364cca715') {
+            return back()->with('error', 'Username tidak ditemukan atau bukan user biasa.')
+                        ->withInput($request->only('username'));
         }
 
-        return back()->with('error', 'Login gagal, periksa kembali username dan password Anda.')
-                     ->withInput($request->only('username'));
+        if (!Hash::check($request->password, $user->password)) {
+            return back()->with('error', 'Password salah.')
+                        ->withInput($request->only('username'));
+        }
+
+        Auth::login($user);
+        $request->session()->regenerate();
+
+        return redirect()->intended('/user/dashboard');
     }
 
-    // Tampilkan form register
     public function showRegisterForm()
     {
         return view('auth.register');
     }
 
-    // Proses register
     public function register(Request $request)
     {
         $request->validate([
@@ -83,7 +86,36 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan login.');
     }
 
-    // Logout user
+    public function showAdminLoginForm()
+    {
+        return view('auth.login-admin');
+    }
+
+    public function adminLogin(Request $request)
+    {
+        $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+        $user = User::where('username', $request->username)->first();
+
+        if (!$user || $user->role_id !== '6ef8fcb8-7bd8-4279-b26b-b06b20b78043') {
+            return back()->with('error', 'Username tidak ditemukan atau bukan admin.')
+                        ->withInput($request->only('username'));
+        }
+
+        if (!Hash::check($request->password, $user->password)) {
+            return back()->with('error', 'Password salah.')
+                        ->withInput($request->only('username'));
+        }
+
+        Auth::login($user);
+        $request->session()->regenerate();
+
+        return redirect()->intended('/admin/dashboard');
+    }
+
     public function logout(Request $request)
     {
         Auth::logout();
