@@ -152,7 +152,7 @@
                 <div class="step active">
                     <div class="mb-3">
                         <label for="name" class="form-label">Nama Lengkap <span class="text-warning">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required />
+                        <input type="text" id="name" name="name" ria-label="Nama Lengkap" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required />
                         @error('name')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -336,15 +336,52 @@
             }
         });
 
+        // function showPreview(file) {
+        //     if (!file.type.startsWith('image/')) return;
+        //     const reader = new FileReader();
+        //     reader.onload = e => {
+        //         previewImage.src = e.target.result;
+        //         previewImage.classList.remove('d-none');
+        //     };
+        //     reader.readAsDataURL(file);
+        // }
         function showPreview(file) {
-            if (!file.type.startsWith('image/')) return;
-            const reader = new FileReader();
-            reader.onload = e => {
-                previewImage.src = e.target.result;
-                previewImage.classList.remove('d-none');
-            };
-            reader.readAsDataURL(file);
-        }
+    const maxSize = 2 * 1024 * 1024; // 2MB
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+
+    if (!allowedTypes.includes(file.type)) {
+        alert("Hanya file JPG, PNG, dan WebP yang diperbolehkan.");
+        return;
+    }
+
+    if (file.size > maxSize) {
+        alert("Ukuran gambar maksimal 2MB.");
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = e => {
+        previewImage.src = e.target.result;
+        previewImage.classList.remove('d-none');
+    };
+    reader.readAsDataURL(file);
+}
+
+
+        const serverErrors = {
+        name: "{{ $errors->has('name') ? '1' : '' }}",
+        email: "{{ $errors->has('email') ? '1' : '' }}",
+        username: "{{ $errors->has('username') ? '1' : '' }}",
+        password: "{{ $errors->has('password') ? '1' : '' }}"
+    };
+
+    // Arahkan user langsung ke step error
+    document.addEventListener('DOMContentLoaded', () => {
+        if (serverErrors.name) currentStep = 0;
+        else if (serverErrors.email) currentStep = 1;
+        else if (serverErrors.username || serverErrors.password) currentStep = 2;
+        showStep(currentStep);
+    });
     </script>
 </body>
 </html>

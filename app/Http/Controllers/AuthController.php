@@ -6,40 +6,41 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
+    // Tampilkan form login
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
+    // Proses login
     public function login(Request $request)
     {
         $request->validate([
             'username' => 'required|string',
-            'password' => 'required|string|min:6',
+            'password' => 'required|string',
         ]);
 
-        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-            Log::info('Login berhasil untuk: ' . $request->username);
+        $credentials = $request->only('username', 'password');
+
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('dashboard');
+            return redirect()->intended('/dashboard');
         }
 
-        Log::warning('Login gagal untuk: ' . $request->username);
-        throw ValidationException::withMessages([
-            'username' => ['Username atau password salah.'],
-        ]);
+        return back()->with('error', 'Login gagal, periksa kembali username dan password Anda.')
+                     ->withInput($request->only('username'));
     }
 
+    // Tampilkan form register
     public function showRegisterForm()
     {
         return view('auth.register');
     }
 
+    // Proses register
     public function register(Request $request)
     {
         $request->validate([
@@ -49,32 +50,40 @@ class AuthController extends Controller
             'no_telepon' => 'nullable|string|max:20',
             'password' => 'required|string|min:6|confirmed',
             'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'role_id' => 'required|exists:roles,id',  // pastikan tabel roles ada
+        ], [
+            'name.required' => 'Nama wajib diisi.',
+            'username.required' => 'Username wajib diisi.',
+            'username.unique' => 'Username sudah digunakan.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Email sudah digunakan.',
+            'password.required' => 'Password wajib diisi.',
+            'password.confirmed' => 'Konfirmasi password tidak cocok.',
+            'profile_picture.image' => 'File harus berupa gambar.',
+            'profile_picture.max' => 'Ukuran gambar maksimal 2MB.',
+            'role_id.required' => 'Role wajib dipilih.',
+            'role_id.exists' => 'Role tidak ditemukan.',
         ]);
 
         $filename = null;
-
         if ($request->hasFile('profile_picture')) {
-            $file = $request->file('profile_picture');
-            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('uploads/profile'), $filename);
+            $filename = $request->file('profile_picture')->store('profile', 'public');
         }
 
-        $user = User::create([
+        User::create([
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
             'no_telepon' => $request->no_telepon,
             'password' => Hash::make($request->password),
             'profile_picture' => $filename,
-            'role_id' => '6fe4ee1b-943d-4ee3-afdd-f77364cca715',
+            'role_id' => $request->role_id,
         ]);
 
-        // Auth::login($user);
-
-        //return redirect('/login')->with('success', 'Registrasi berhasil!');
         return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan login.');
     }
 
+    // Logout user
     public function logout(Request $request)
     {
         Auth::logout();

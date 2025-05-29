@@ -11,6 +11,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    // Jika kamu ingin primary key tipe string UUID
     protected $keyType = 'string';
     public $incrementing = false;
 
@@ -31,13 +32,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
-    }
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        // Kalau Laravel 9 ke atas, 'password' bisa otomatis di-hash via cast
+        'password' => 'hashed',
+    ];
 
     protected static function booted()
     {
@@ -48,43 +47,14 @@ class User extends Authenticatable
         });
     }
 
-    public static function createPengguna($data)
+    // Override supaya Laravel pakai 'username' sebagai identifier login
+    public function getAuthIdentifierName()
     {
-        return self::create([
-            'name'            => $data['name'],
-            'username'        => $data['username'],
-            'email'           => $data['email'],
-            'no_telepon'      => $data['no_telepon'],
-            'password'        => bcrypt($data['password']),
-            'profile_picture' => $data['profile_picture'] ?? null,
-            'role_id'         => $data['role_id'],
-        ]);
-    }
-
-    public function updatePengguna($data)
-    {
-        return $this->update([
-            'name'            => $data['name'] ?? $this->name,
-            'username'        => $data['username'] ?? $this->username,
-            'email'           => $data['email'] ?? $this->email,
-            'no_telepon'      => $data['no_telepon'] ?? $this->no_telepon,
-            'profile_picture' => $data['profile_picture'] ?? $this->profile_picture,
-            'role_id'         => $data['role_id'] ?? $this->role_id,
-        ]);
-    }
-
-    public function deletePengguna()
-    {
-        return $this->delete();
+        return 'username';
     }
 
     public function role()
     {
         return $this->belongsTo(Role::class, 'role_id');
-    }
-
-    public function getAuthIdentifierName()
-    {
-        return 'username';
     }
 }

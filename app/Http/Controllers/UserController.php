@@ -13,7 +13,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::orderBy('created_at', 'asc')->with('role')->get();
-        return view('user.userList', compact('users'));
+        return view('user.index', compact('users'));
     }
 
     public function create()
