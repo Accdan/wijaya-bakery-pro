@@ -10,12 +10,12 @@ class RoleController extends Controller
     public function index()
     {
         $roles = Role::all();
-        return view('role.index', compact('roles'));
+        return view('admin.role.index', compact('roles'));
     }
 
     public function create()
     {
-        return view('role.create');
+        return view('admin.role.create');
     }
 
     public function store(Request $request)
@@ -28,13 +28,13 @@ class RoleController extends Controller
 
         Role::createRole($request->all());
 
-        return redirect()->route('role.index')->with('success', 'Role berhasil ditambahkan.');
+        return redirect()->route('admin.role.index')->with('success', 'Role berhasil ditambahkan.');
     }
 
     public function edit($id)
     {
         $role = Role::findOrFail($id);
-        return view('role.edit', compact('role'));
+        return view('admin.role.edit', compact('role'));
     }
 
     public function update(Request $request, $id)
@@ -48,7 +48,7 @@ class RoleController extends Controller
         $role = Role::findOrFail($id);
         $role->updateRole($request->all());
 
-        return redirect()->route('role.index')->with('success', 'Role berhasil diperbarui.');
+        return redirect()->route('admin.role.index')->with('success', 'Role berhasil diperbarui.');
     }
 
     public function destroy($id)
@@ -56,7 +56,7 @@ class RoleController extends Controller
         $role = Role::findOrFail($id);
         $role->deleteRole();
 
-        return redirect()->route('role.index')->with('success', 'Role berhasil dihapus.');
+        return redirect()->route('admin.role.index')->with('success', 'Role berhasil dihapus.');
     }
 
     public function toggleStatus($id)

@@ -12,13 +12,13 @@ class MenuController extends Controller
     public function index()
     {
         $menus = Menu::with('kategori')->orderBy('created_at', 'desc')->get();
-        return view('menu.index', compact('menus'));
+        return view('admin.menu.index', compact('menus'));
     }
 
     public function create()
     {
         $kategoris = Kategori::all();
-        return view('menu.create', compact('kategoris'));
+        return view('admin.menu.create', compact('kategoris'));
     }
 
     public function store(Request $request)
@@ -44,7 +44,7 @@ class MenuController extends Controller
         $menu->id = (string) \Illuminate\Support\Str::uuid();
         $menu->save();
 
-        return redirect()->route('menu.index')->with('success', 'Menu berhasil ditambahkan!');
+        return redirect()->route('admin.menu.index')->with('success', 'Menu berhasil ditambahkan!');
     }
 
 
@@ -52,7 +52,7 @@ class MenuController extends Controller
     {
         $menu = Menu::findOrFail($id);
         $kategoris = Kategori::all();
-        return view('menu.edit', compact('menu', 'kategoris'));
+        return view('admin.menu.edit', compact('menu', 'kategoris'));
     }
 
     public function update(Request $request, $id)
@@ -79,14 +79,14 @@ class MenuController extends Controller
 
         $menu->save();
 
-        return redirect()->route('menu.index')->with('success', 'Menu berhasil diperbarui.');
+        return redirect()->route('admin.menu.index')->with('success', 'Menu berhasil diperbarui.');
     }
 
 
     public function show($id)
     {
         $menu = Menu::with(['kategori', 'ingredients'])->findOrFail($id);
-        return view('menu.show', compact('menu'));
+        return view('admin.menu.show', compact('menu'));
     }
 
     public function destroy($id)
@@ -94,7 +94,7 @@ class MenuController extends Controller
         $menu = Menu::findOrFail($id);
         $menu->deleteMenu();
 
-        return redirect()->route('menu.index')->with('success', 'Menu berhasil dihapus.');
+        return redirect()->route('admin.menu.index')->with('success', 'Menu berhasil dihapus.');
     }
 
     public function attachTag(Request $request, $menuId)

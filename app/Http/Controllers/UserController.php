@@ -13,13 +13,13 @@ class UserController extends Controller
     public function index()
     {
         $users = User::orderBy('created_at', 'asc')->with('role')->get();
-        return view('user.index', compact('users'));
+        return view('admin.user.index', compact('users'));
     }
 
     public function create()
     {
         $roles = Role::all();
-        return view('user.create', compact('roles'));
+        return view('admin.user.create', compact('roles'));
     }
 
     public function store(Request $request)
@@ -44,16 +44,16 @@ class UserController extends Controller
             $data['profile_picture'] = $filename;
         }
 
-        User::createPengguna($data);
+        User::create($data);
 
-        return redirect()->route('user.index')->with('success', 'User berhasil ditambahkan');
+        return redirect()->route('admin.user.index')->with('success', 'User berhasil ditambahkan');
     }
 
     public function edit($id)
     {
         $user = User::findOrFail($id);
         $roles = Role::all();
-        return view('user.edit', compact('user', 'roles'));
+        return view('admin.user.edit', compact('user', 'roles'));
     }
 
     public function update(Request $request, $id)
@@ -93,15 +93,15 @@ class UserController extends Controller
             $data['profile_picture'] = $filename;
         }
 
-        $user->updatePengguna($data);
+        $user->update($data);
 
-        return redirect()->route('user.index')->with('success', 'User berhasil diperbarui.');
+        return redirect()->route('admin.user.index')->with('success', 'User berhasil diperbarui.');
     }
 
     public function show($id)
     {
         $user = User::with('role')->findOrFail($id);
-        return view('user.show', compact('user'));
+        return view('admin.user.show', compact('user'));
     }
 
     public function destroy($id)
@@ -109,6 +109,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->deletePengguna();
 
-        return redirect()->route('user.index')->with('success', 'User berhasil dihapus.');
+        return redirect()->route('admin.user.index')->with('success', 'User berhasil dihapus.');
     }
 }

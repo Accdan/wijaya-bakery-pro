@@ -113,7 +113,10 @@ class AuthController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->intended('/admin/dashboard');
+        // dd(Auth::user());
+
+        // return redirect()->intended('/dashboard');
+        return redirect('/dashboard');
     }
 
     public function logout(Request $request)

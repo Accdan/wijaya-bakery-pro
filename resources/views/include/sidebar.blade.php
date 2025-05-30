@@ -11,7 +11,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Dashboard -->
                 <li class="nav-item">
-                    <a href="{{ url('dashboard') }}" class="nav-link {{ request()->is('dashboard') ? 'active-custom' : '' }}">
+                    <a href="{{ url('admin/dashboard') }}" class="nav-link {{ request()->is('dashboard') ? 'active-custom' : '' }}">
                         <i class="nav-icon fas fa-home"></i>
                         <p>Dashboard</p>
                     </a>

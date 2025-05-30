@@ -18,6 +18,6 @@ class DashboardController extends Controller
         $totalKategori  = Kategori::count();
         $totalMenu      = Menu::count();
 
-        return view('dashboard', compact('totalPeran' , 'totalUser','totalKategori', 'totalMenu'));
+        return view('admin.dashboard', compact('totalPeran' , 'totalUser','totalKategori', 'totalMenu'));
     }
 }
