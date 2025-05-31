@@ -44,7 +44,7 @@ class MenuController extends Controller
         $menu->id = (string) \Illuminate\Support\Str::uuid();
         $menu->save();
 
-        return redirect()->route('admin.menu.index')->with('success', 'Menu berhasil ditambahkan!');
+        return redirect()->route('menu.index')->with('success', 'Menu berhasil ditambahkan!');
     }
 
 
@@ -61,7 +61,7 @@ class MenuController extends Controller
 
         $request->validate([
             'nama_menu' => 'required|string|max:255',
-            'kategori_id' => 'required|exists:kategoris,id',
+            'kategori_id' => 'required|exists:kategori,id',
             'deskripsi_menu' => 'required|string',
             'prosedur' => 'required|string',
             'gambar_menu' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
@@ -73,13 +73,19 @@ class MenuController extends Controller
         $menu->prosedur = $request->prosedur;
 
         if ($request->hasFile('gambar_menu')) {
-            $gambar = $request->file('gambar_menu')->store('menu', 'public');
-            $menu->gambar_menu = $gambar;
+            if ($menu->gambar_menu && file_exists(public_path('uploads/menu/' . $menu->gambar_menu))) {
+                unlink(public_path('uploads/menu/' . $menu->gambar_menu));
+            }
+
+            $file = $request->file('gambar_menu');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/menu'), $filename);
+            $menu->gambar_menu = $filename;
         }
 
         $menu->save();
 
-        return redirect()->route('admin.menu.index')->with('success', 'Menu berhasil diperbarui.');
+        return redirect()->route('menu.index')->with('success', 'Menu berhasil diperbarui.');
     }
 
 

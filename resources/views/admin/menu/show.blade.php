@@ -55,8 +55,8 @@
                         <div class="card-body">
                             <div class="row justify-content-center">
                                 <div class="col-12 col-md-4 text-center mb-3">
-                                    <img src="{{ $menu->gambar ? asset('public\uploads' . $menu->gambar) : asset('image/default-food.png') }}"
-                                        class="menu-img img-fluid rounded" alt="Foto Menu">
+                                    <img src="{{ $menu->gambar_menu ? asset('uploads/menu/' . $menu->gambar_menu) : asset('image/default-food.png') }}"
+     class="menu-img img-fluid rounded" alt="Foto Menu">
                                 </div>
                                 <div class="col-12 col-md-8">
                                     <div class="table-responsive">
@@ -96,7 +96,7 @@
                                                 <th>Terakhir diubah</th>
                                                 <td>{{ $menu->updated_at->translatedFormat('d F Y H:i') }}</td>
                                             </tr>
-                                            
+
                                         </table>
                                     </div>
                                 </div>

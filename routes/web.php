@@ -12,6 +12,7 @@ use App\Http\Controllers\LikesController;
 use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\IngredientsController;
 use App\Http\Controllers\TagsController;
+use App\Http\Controllers\DashboardUserController;
 
 // Import middleware IsAdmin
 use App\Http\Middleware\IsAdmin;
@@ -57,3 +58,6 @@ Route::resource('menu', MenuController::class);
 
     Route::resource('tags', TagsController::class);
 // });
+
+Route::get('/dashboard-user', [DashboardUserController::class, 'index'])->name('dashboard.user');
+Route::get('/menu/{id}', [MenuController::class, 'show'])->name('menu.show');
