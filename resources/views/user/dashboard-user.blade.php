@@ -63,7 +63,7 @@
     </div>
 </nav>
 
-<div class="container">
+<div class="container mb-5">
     <h2 class="mb-4 fw-bold text-center">🍽 Menu Masakan Favorit</h2>
 
     <div class="row g-4">
@@ -93,7 +93,8 @@
                         data-id="{{ $menu['id'] }}"
                         data-title="{{ $menu['title'] }}"
                         data-desc="{{ $menu['desc'] }}"
-                        data-image="{{ asset('uploads/menu/' . $menu['image']) }}">
+                        data-image="{{ asset('uploads/menu/' . $menu['image']) }}"
+                        data-detail-url="{{ route('menu.detail', $menu['id']) }}">
                         Lihat Detail Resep
                     </button>
 
@@ -122,23 +123,28 @@
 
 <!-- Modal Detail -->
 <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="detailModalLabel">Detail Resep</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
-      </div>
-      <div class="modal-body">
-        <img id="detailImage" src="" alt="" class="img-fluid rounded mb-3" />
-        <h4 id="detailTitle"></h4>
-        <p id="detailDesc"></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-      </div>
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailModalLabel">Detail Resep</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+            </div>
+            <div class="modal-body">
+                <img id="detailImage" src="" alt="" class="img-fluid rounded mb-3" />
+                <h4 id="detailTitle"></h4>
+                <p id="detailDesc"></p>
+            </div>
+            <a id="detailLink" href="#" class="btn btn-warning w-100 mt-auto">
+                Lihat Lebih Detail
+            </a>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
+
+@include('include.footer')
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -149,6 +155,7 @@
         document.getElementById('detailDesc').textContent = button.getAttribute('data-desc');
         document.getElementById('detailImage').src = button.getAttribute('data-image');
         document.getElementById('detailImage').alt = button.getAttribute('data-title');
+        document.getElementById('detailLink').href = button.getAttribute('data-detail-url');
     });
 
     document.querySelectorAll('.like-btn').forEach(btn => {

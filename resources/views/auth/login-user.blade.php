@@ -11,7 +11,7 @@
 
     {{-- Background --}}
     <div class="bg-image d-flex align-items-center justify-content-center min-vh-100"
-         style="background-image: url('{{ asset('image/resepbg.jpg') }}');
+         style="background-image: url('{{ asset('image/random1.jpg') }}');
                 background-size: cover;
                 background-position: center;">
 

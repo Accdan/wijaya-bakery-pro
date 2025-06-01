@@ -90,7 +90,7 @@
                 @foreach ([
                     ['image' => 'hero-bg.jpg', 'title' => 'Selamat Datang di Dapur Indonesia', 'desc' => 'Temukan berbagai resep nusantara yang menggoda selera'],
                     ['image' => 'random1.jpg', 'title' => 'Resep Masakan Nusantara', 'desc' => 'Setiap masakan membawa cerita dan kenangan'],
-                    ['image' => 'ampera1.jpg', 'title' => 'Inspirasi Dapur Anda', 'desc' => 'Resep inovatif untuk semua kesempatan'],
+                    ['image' => 'random2.jpg', 'title' => 'Inspirasi Dapur Anda', 'desc' => 'Resep inovatif untuk semua kesempatan'],
                 ] as $index => $slide)
                     <div class="carousel-item h-100 position-relative {{ $index === 0 ? 'active' : '' }}">
                         <img src="{{ asset('image/' . $slide['image']) }}" class="d-block w-100 h-100 object-fit-cover" alt="Slide">

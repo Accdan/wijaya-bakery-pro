@@ -120,4 +120,10 @@ class MenuController extends Controller
 
         return back()->with('success', 'Tag berhasil dihapus dari menu.');
     }
+
+    public function detail($id)
+    {
+        $menu = Menu::findOrFail($id);
+        return view('user.detail-menu', compact('menu'));
+    }
 }

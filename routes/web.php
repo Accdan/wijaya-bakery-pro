@@ -61,3 +61,4 @@ Route::resource('menu', MenuController::class);
 
 Route::get('/dashboard-user', [DashboardUserController::class, 'index'])->name('dashboard.user');
 Route::get('/menu/{id}', [MenuController::class, 'show'])->name('menu.show');
+Route::get('/menu/{id}/detail', [MenuController::class, 'detail'])->name('menu.detail');
