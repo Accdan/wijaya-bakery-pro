@@ -54,4 +54,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class, 'role_id');
     }
+
+    public function isAdmin()
+    {
+        return strtolower($this->role->role_name) === 'admin';
+    }
 }

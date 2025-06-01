@@ -68,13 +68,19 @@ class Menu extends Model
 
     public function likes()
     {
-        return $this->hasMany(Likes::class);
+        return $this->hasMany(Likes::class, 'menu_id');
     }
 
     public function comments()
     {
-        return $this->hasMany(Comments::class);
+        return $this->hasMany(Comments::class, 'menu_id')->latest();
     }
+
+    // public function likedByUser()
+    // {
+    //     if (!auth()->check()) return false;
+    //     return $this->likes()->where('user_id', auth()->id())->exists();
+    // }
 
     public function tags()
     {
