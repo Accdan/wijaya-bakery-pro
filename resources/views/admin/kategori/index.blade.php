@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dapur Indonesia - Kategori</title>
-    <link rel="icon" href="{{ asset('assets/itats-icon.jpg') }}">
+    <link rel="icon" type="image/png" href="{{ asset('image/icondapur.jpg') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
@@ -31,7 +31,7 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h3 class="card-title">Daftar Kategori</h3>
-                        <a href="{{ route('kategori.create') }}" class="btn btn-primary btn-sm ml-auto">
+                        <a href="{{ route('admin.kategori.create') }}" class="btn btn-primary btn-sm ml-auto">
                             <i class="fas fa-plus"></i> Tambah Kategori
                         </a>
                     </div>
@@ -51,7 +51,7 @@
                                             <td>{{ $index + 1 }}</td>
                                             <td>{{ $kategori->nama_kategori }}</td>
                                             <td class="text-center">
-                                                <a href="{{ route('kategori.edit', $kategori->id) }}" class="btn btn-info btn-sm">
+                                                <a href="{{ route('admin.kategori.edit', $kategori->id) }}" class="btn btn-info btn-sm">
                                                     <i class="fas fa-edit"></i> Edit
                                                 </a>
                                                 <button class="btn btn-danger btn-sm delete-kategori-btn"

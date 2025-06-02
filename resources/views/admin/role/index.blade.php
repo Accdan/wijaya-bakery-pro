@@ -68,7 +68,7 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h3 class="card-title">Daftar Peran</h3>
-                            <a href="{{ route('role.create') }}" class="btn btn-primary btn-sm ml-auto">
+                            <a href="{{ route('admin.role.create') }}" class="btn btn-primary btn-sm ml-auto">
                                 <i class="fas fa-plus"></i> Tambah Peran
                             </a>
                         </div>
@@ -96,7 +96,7 @@
                                                         {{ $role->role_status ? 'checked' : '' }}>
                                                 </td>
                                                 <td class="text-center">
-                                                    <a href="{{ route('role.edit', $role->id) }}" class="btn btn-info btn-sm">
+                                                    <a href="{{ route('admin.role.edit', $role->id) }}" class="btn btn-info btn-sm">
                                                         <i class="fas fa-edit"></i> Edit
                                                     </a>
                                                     <button class="btn btn-danger btn-sm delete-role-btn"

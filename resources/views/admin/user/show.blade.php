@@ -87,7 +87,7 @@
                             </div>
                         </div>
                         <div class="card-footer text-right">
-                            <a href="{{ route('user.index') }}" class="btn btn-secondary">
+                            <a href="{{ route('admin.user.index') }}" class="btn btn-secondary">
                                 <i class="fas fa-arrow-left"></i> Kembali
                             </a>
                         </div>

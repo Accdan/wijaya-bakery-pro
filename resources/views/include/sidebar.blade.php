@@ -28,7 +28,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('role.index') }}" class="nav-link {{ request()->is('role*') ? 'active-custom-sub' : '' }}">
+                            <a href="{{ route('admin.role.index') }}" class="nav-link {{ request()->is('role*') ? 'active-custom-sub' : '' }}">
                                 <i class="fas fa-user-shield nav-icon"></i>
                                 <p>Peran Pengguna</p>
                             </a>
@@ -71,7 +71,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('tags.index') }}" class="nav-link {{ request()->is('tags*') ? 'active-custom-sub' : '' }}">
+                            <a href="{{ route('admin.tags.index') }}" class="nav-link {{ request()->is('tags*') ? 'active-custom-sub' : '' }}">
                                 <i class="fas fa-tags nav-icon"></i>
                                 <p>Tag Resep</p>
                             </a>

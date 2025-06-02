@@ -35,7 +35,7 @@
                         @if(session('error'))
                             <div class="alert alert-danger">{{ session('error') }}</div>
                         @endif
-                        <form action="{{ route('role.update', $role->id) }}" method="POST">
+                        <form action="{{ route('admin.role.update', $role->id) }}" method="POST">
                             @csrf
                             @method('PUT')
 
@@ -73,7 +73,7 @@
                                 <button type="submit" class="btn btn-success">
                                     <i class="fas fa-save"></i> Simpan Perubahan
                                 </button>
-                                <a href="{{ route('role.index') }}" class="btn btn-secondary">
+                                <a href="{{ route('admin.role.index') }}" class="btn btn-secondary">
                                     <i class="fas fa-arrow-left"></i> Batal
                                 </a>
                             </div>

@@ -35,7 +35,7 @@
                         @if(session('error'))
                             <div class="alert alert-danger">{{ session('error') }}</div>
                         @endif
-                        <form action="{{ route('role.store') }}" method="POST">
+                        <form action="{{ route('admin.role.store') }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="role_name"><i class="fas fa-id-badge"></i> Nama Peran</label>
@@ -71,7 +71,7 @@
                                 <button type="submit" class="btn btn-success">
                                     <i class="fas fa-save"></i> Simpan
                                 </button>
-                                <a href="{{ route('role.index') }}" class="btn btn-secondary">
+                                <a href="{{ route('admin.role.index') }}" class="btn btn-secondary">
                                     <i class="fas fa-arrow-left"></i> Batal
                                 </a>
                             </div>

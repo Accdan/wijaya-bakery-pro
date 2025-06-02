@@ -37,7 +37,7 @@
                                 <div class="alert alert-danger">{{ session('error') }}</div>
                             @endif
 
-                            <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('admin.user.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
                                     <!-- Kiri -->
@@ -104,7 +104,7 @@
                                 <!-- Tombol -->
                                 <div class="mt-4">
                                     <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
-                                    <a href="{{ route('user.index') }}" class="btn btn-secondary">Batal</a>
+                                    <a href="{{ route('admin.user.index') }}" class="btn btn-secondary">Batal</a>
                                 </div>
                             </form>
                         </div>

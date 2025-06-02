@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
 
 class Menu extends Model
 {
@@ -76,11 +77,11 @@ class Menu extends Model
         return $this->hasMany(Comments::class, 'menu_id')->latest();
     }
 
-    // public function likedByUser()
-    // {
-    //     if (!auth()->check()) return false;
-    //     return $this->likes()->where('user_id', auth()->id())->exists();
-    // }
+    public function likedByUser()
+    {
+        if (!Auth::check()) return false;
+        return $this->likes()->where('user_id', Auth::id())->exists();
+    }
 
     public function tags()
     {

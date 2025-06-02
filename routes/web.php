@@ -31,11 +31,10 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('regi
 Route::post('/register', [AuthController::class, 'register']);
 
 Route::get('/login-admin', [AuthController::class, 'showAdminLoginForm'])->name('login-admin');
-Route::post('/post-login-admin', [AuthController::class, 'adminLogin']);
+Route::post('/login-admin', [AuthController::class, 'adminLogin'])->name('login-admin.post');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::resource('kategori', KategoriController::class);
 Route::resource('menu', MenuController::class);
 
 // Group route admin dengan middleware auth + isAdmin
@@ -46,6 +45,8 @@ Route::name('admin.')->middleware('admin')->group(function () {
     Route::post('role/{id}/toggle-status', [RoleController::class, 'toggleStatus'])->name('role.toggleStatus');
 
     Route::resource('user', UserController::class);
+
+    Route::resource('kategori', KategoriController::class);
 
     Route::post('/menu/{id}/like', [LikesController::class, 'toggle'])->name('menu.like');
     Route::post('/comments', [CommentsController::class, 'store'])->name('comments.store');
@@ -61,7 +62,8 @@ Route::name('admin.')->middleware('admin')->group(function () {
 });
 
 Route::name('users')->middleware('users')->group(function () {
-    Route::get('/dashboard-user', [DashboardUserController::class, 'index'])->name('dashboard.user');
+    Route::get('/homepage', [DashboardUserController::class, 'homepage'])->name('users.homepage.user');
+    Route::get('/dashboard-user', [DashboardUserController::class, 'index'])->name('users.dashboard.user');
     Route::get('/menu/{id}', [MenuController::class, 'show'])->name('menu.show');
     Route::get('/menu/{id}/detail', [MenuController::class, 'detail'])->name('menu.detail');
 });

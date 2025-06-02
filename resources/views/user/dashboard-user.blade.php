@@ -8,10 +8,11 @@
     <link rel="icon" type="image/png" href="{{ asset('image/icondapur.jpg') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@300;600;800&display=swap" rel="stylesheet" />
     <style>
         body {
-            font-family: 'Nunito', sans-serif;
+            font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background-color: #fdfdfd;
         }
         .navbar-brand {
@@ -61,14 +62,36 @@
             object-fit: cover;
             max-height: 300px;
         }
+        .modal-title {
+            font-family: 'Pacifico', cursive;
+            font-size: 1.5rem;
+            color: #e67e22;
+        }
+
+        #detailDesc {
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
     </style>
 </head>
 <body>
 
 <nav class="navbar navbar-light bg-white shadow-sm mb-4">
-    <div class="container">
+    <div class="container d-flex justify-content-between align-items-center">
         <a class="navbar-brand" href="#">Dapur Indonesia</a>
-        <a href="{{ route('logout') }}" class="btn btn-outline-danger btn-sm">Logout</a>
+
+        <div>
+            <a href="{{ url('/homepage') }}" class="btn btn-outline-primary btn-sm mr-2">
+                <i class="fas fa-home"></i> Beranda
+            </a>
+
+            <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                @csrf
+                <button type="submit" class="btn btn-outline-danger btn-sm">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </form>
+        </div>
     </div>
 </nav>
 
@@ -133,19 +156,25 @@
 <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header border-0">
-                <h5 class="modal-title" id="detailModalLabel">Detail Resep</h5>
+            <div class="modal-header border-0 pb-0">
+                <h5 class="modal-title fw-bold" id="detailModalLabel">Detail Resep Masakan</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
             </div>
             <div class="modal-body">
-                <img id="detailImage" src="" alt="" class="img-fluid rounded mb-3" />
-                <h4 id="detailTitle"></h4>
-                <p id="detailDesc"></p>
-                <a id="detailLink" href="#" class="btn btn-warning w-100 mt-3">
-                    Lihat Lebih Detail
-                </a>
+                <div class="row g-4 align-items-start">
+                    <div class="col-md-6">
+                        <img id="detailImage" src="" alt="" class="img-fluid rounded shadow-sm w-100" style="max-height: 300px; object-fit: cover;">
+                    </div>
+                    <div class="col-md-6">
+                        <h4 id="detailTitle" class="fw-semibold mb-3"></h4>
+                        <p id="detailDesc" class="text-muted"></p>
+                        <a id="detailLink" href="#" class="btn btn-warning w-100 mt-3">
+                            <i class="bi bi-book-open"></i> Lihat Resep Lengkap
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="modal-footer border-0">
+            <div class="modal-footer border-0 pt-0">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
             </div>
         </div>

@@ -37,7 +37,7 @@
                                 <div class="alert alert-danger">{{ session('error') }}</div>
                             @endif
 
-                            <form action="{{ route('user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('admin.user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
@@ -104,7 +104,7 @@
 
                                 <div class="mt-4">
                                     <button type="submit" class="btn btn-warning"><i class="fas fa-save"></i> Simpan Perubahan</button>
-                                    <a href="{{ route('user.index') }}" class="btn btn-secondary">Batal</a>
+                                    <a href="{{ route('admin.user.index') }}" class="btn btn-secondary">Batal</a>
                                 </div>
                             </form>
                         </div>
