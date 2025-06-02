@@ -68,4 +68,4 @@ Route::name('users')->middleware('users')->group(function () {
     Route::get('/menu/{id}/detail', [MenuController::class, 'detail'])->name('menu.detail');
 });
 
-
+require base_path('routes/api.php');

@@ -87,4 +87,9 @@ class Menu extends Model
     {
         return $this->belongsToMany(Tags::class, 'menu_tag')->withTimestamps();
     }
+
+    public function translations()
+    {
+        return $this->hasMany(MenuTranslation::class);
+    }
 }

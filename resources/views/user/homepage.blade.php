@@ -125,7 +125,7 @@
                 <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-shopping-basket me-1"></i>Pesanan</a></li>
                 <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-plus-circle me-1"></i>Resep</a></li>
                 <li class="nav-item">
-                    <form action="#" method="POST" class="d-inline">
+                    <form action="{{ route('logout') }}" method="POST" class="d-inline">
                         @csrf
                         <button class="btn btn-sm btn-danger ms-2"><i class="fas fa-sign-out-alt me-1"></i>Keluar</button>
                     </form>
@@ -218,15 +218,15 @@
 {{-- Scripts --}}
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    var myCarousel = document.querySelector('#heroCarousel');
-    var carousel = new bootstrap.Carousel(myCarousel, {
-      interval: 4000,
-      ride: 'carousel',
-      pause: false,
-      wrap: true
+    document.addEventListener('DOMContentLoaded', function () {
+        var myCarousel = document.querySelector('#heroCarousel');
+        var carousel = new bootstrap.Carousel(myCarousel, {
+            interval: 4000,
+            ride: 'carousel',
+            pause: false,
+            wrap: true
+        });
     });
-  });
 </script>
 </body>
 </html>
