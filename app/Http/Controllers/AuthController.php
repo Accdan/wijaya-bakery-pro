@@ -21,9 +21,9 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        $user = User::where('username', $request->username)->first();
-
-        if (!$user || $user->role_id !== '6fe4ee1b-943d-4ee3-afdd-f77364cca715') {
+        $user = User::where('username', $request->username)->with('role')->first();
+        // dd($user->role());
+        if (!$user || $user->role->role_name !== 'pengguna') {
             return back()->with('error', 'Username tidak ditemukan atau bukan user biasa.')
                         ->withInput($request->only('username'));
         }
@@ -33,10 +33,10 @@ class AuthController extends Controller
                         ->withInput($request->only('username'));
         }
 
-        Auth::login($user);
+        Auth::guard('users')->login($user);
         $request->session()->regenerate();
 
-        return redirect()->intended('/user/dashboard');
+        return redirect()->intended('/dashboard-user');
     }
 
     public function showRegisterForm()
@@ -99,7 +99,7 @@ class AuthController extends Controller
         ]);
 
         $user = User::where('username', $request->username)->first();
-
+        // dd($user);
         if (!$user || $user->role_id !== '6ef8fcb8-7bd8-4279-b26b-b06b20b78043') {
             return back()->with('error', 'Username tidak ditemukan atau bukan admin.')
                         ->withInput($request->only('username'));
@@ -110,13 +110,12 @@ class AuthController extends Controller
                         ->withInput($request->only('username'));
         }
 
-        Auth::login($user);
+        Auth::guard('admin')->login($user);
         $request->session()->regenerate();
 
-        // dd(Auth::user());
+        // dd(Auth::guard('admin')->user());
 
-        // return redirect()->intended('/dashboard');
-        return redirect('/dashboard');
+        return redirect('/dashboard-admin');
     }
 
     public function logout(Request $request)

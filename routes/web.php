@@ -24,13 +24,14 @@ Route::get('/', function () {
 
 Route::get('/home', [HomeController::class, 'index']);
 
-Route::get('/login', [AuthController::class, 'showUserLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'userLogin']);
+Route::get('/login-user', [AuthController::class, 'showUserLoginForm'])->name('login-user');
+// Route::get('/login-user', [AuthController::class, 'showUserLoginForm'])->name('login');
+Route::post('/login-user', [AuthController::class, 'userLogin']);
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 
 Route::get('/login-admin', [AuthController::class, 'showAdminLoginForm'])->name('login-admin');
-Route::post('/login-admin', [AuthController::class, 'adminLogin']);
+Route::post('/post-login-admin', [AuthController::class, 'adminLogin']);
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -38,8 +39,8 @@ Route::resource('kategori', KategoriController::class);
 Route::resource('menu', MenuController::class);
 
 // Group route admin dengan middleware auth + isAdmin
-// Route::name('admin.')->middleware(['auth', RedirectIfNotAdmin::class])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::name('admin.')->middleware('admin')->group(function () {
+    Route::get('/dashboard-admin', [DashboardController::class, 'index'])->name('dashboard.admin');
 
     Route::resource('role', RoleController::class);
     Route::post('role/{id}/toggle-status', [RoleController::class, 'toggleStatus'])->name('role.toggleStatus');
@@ -57,8 +58,12 @@ Route::resource('menu', MenuController::class);
     Route::delete('/ingredients/{id}', [IngredientsController::class, 'destroy']);
 
     Route::resource('tags', TagsController::class);
-// });
+});
 
-Route::get('/dashboard-user', [DashboardUserController::class, 'index'])->name('dashboard.user');
-Route::get('/menu/{id}', [MenuController::class, 'show'])->name('menu.show');
-Route::get('/menu/{id}/detail', [MenuController::class, 'detail'])->name('menu.detail');
+Route::name('users')->middleware('users')->group(function () {
+    Route::get('/dashboard-user', [DashboardUserController::class, 'index'])->name('dashboard.user');
+    Route::get('/menu/{id}', [MenuController::class, 'show'])->name('menu.show');
+    Route::get('/menu/{id}/detail', [MenuController::class, 'detail'])->name('menu.detail');
+});
+
+

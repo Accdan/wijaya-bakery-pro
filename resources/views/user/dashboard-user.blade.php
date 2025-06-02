@@ -1,4 +1,4 @@
-<!-- dashboard-user.blade.php -->
+<!-- resources/views/dashboard-user.blade.php -->
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -19,15 +19,18 @@
             font-size: 1.8rem;
         }
         .card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease-in-out;
         }
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
         }
         .like-btn, .comment-btn {
             cursor: pointer;
-            transition: color 0.3s;
+            transition: color 0.3s ease;
         }
         .like-btn.liked {
             color: #ffc107;
@@ -36,21 +39,27 @@
             max-height: 150px;
             overflow-y: auto;
             background: #f8f9fa;
-            padding: 0.5rem;
+            padding: 0.75rem;
             border-radius: 0.5rem;
-            border: 1px solid #ccc;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 0.5rem;
+        }
+        .comment-input {
+            border-radius: 0.25rem 0 0 0.25rem;
+        }
+        .btn-submit-comment {
+            border-radius: 0 0.25rem 0.25rem 0;
         }
         .btn-warning {
             font-weight: bold;
         }
-        .card-text {
-            color: #555;
-        }
         .modal-content {
             border-radius: 1rem;
+            padding: 1rem;
         }
-        .btn-submit-comment {
-            float: right;
+        .modal-body img {
+            object-fit: cover;
+            max-height: 300px;
         }
     </style>
 </head>
@@ -64,7 +73,7 @@
 </nav>
 
 <div class="container mb-5">
-    <h2 class="mb-4 fw-bold text-center">🍽 Menu Masakan Favorit</h2>
+    <h2 class="text-center fw-bold mb-4">🍽 Menu Masakan Favorit</h2>
 
     <div class="row g-4">
         @foreach ($menus ?? [] as $menu)
@@ -77,7 +86,7 @@
 
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <div>
-                            <span class="like-btn" role="button" title="Like">
+                            <span class="like-btn" role="button" title="Suka">
                                 <i class="bi bi-star"></i>
                             </span>
                             <span class="ms-1 like-count">0</span>
@@ -94,12 +103,12 @@
                         data-title="{{ $menu['title'] }}"
                         data-desc="{{ $menu['desc'] }}"
                         data-image="{{ asset('uploads/menu/' . $menu['image']) }}"
-                        data-detail-url="{{ route('menu.detail', $menu['id']) }}">
+                        data-detail-url="{{ route('usersmenu.detail', $menu['id']) }}">
                         Lihat Detail Resep
                     </button>
 
                     <div class="collapse mt-3" id="comments-{{ $menu['id'] }}">
-                        <div class="comments-section mb-2">
+                        <div class="comments-section">
                             @if (!empty($menu['comments']))
                                 @foreach ($menu['comments'] as $comment)
                                     <div><strong>{{ $comment['user'] }}:</strong> {{ $comment['text'] }}</div>
@@ -113,7 +122,6 @@
                             <button class="btn btn-sm btn-warning btn-submit-comment" data-id="{{ $menu['id'] }}">Kirim</button>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -125,7 +133,7 @@
 <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header border-0">
                 <h5 class="modal-title" id="detailModalLabel">Detail Resep</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
             </div>
@@ -133,11 +141,11 @@
                 <img id="detailImage" src="" alt="" class="img-fluid rounded mb-3" />
                 <h4 id="detailTitle"></h4>
                 <p id="detailDesc"></p>
+                <a id="detailLink" href="#" class="btn btn-warning w-100 mt-3">
+                    Lihat Lebih Detail
+                </a>
             </div>
-            <a id="detailLink" href="#" class="btn btn-warning w-100 mt-auto">
-                Lihat Lebih Detail
-            </a>
-            <div class="modal-footer">
+            <div class="modal-footer border-0">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
             </div>
         </div>
@@ -177,12 +185,11 @@
 
     document.querySelectorAll('.btn-submit-comment').forEach(btn => {
         btn.addEventListener('click', () => {
-            const menuId = btn.getAttribute('data-id');
             const parent = btn.closest('.collapse');
             const input = parent.querySelector('.comment-input');
             const commentsSection = parent.querySelector('.comments-section');
             const text = input.value.trim();
-            if(text === '') return alert('Komentar tidak boleh kosong!');
+            if (text === '') return alert('Komentar tidak boleh kosong!');
             const newComment = document.createElement('div');
             newComment.innerHTML = `<strong>Anda:</strong> ${text}`;
             commentsSection.appendChild(newComment);

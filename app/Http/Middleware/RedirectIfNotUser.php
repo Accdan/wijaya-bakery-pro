@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class RedirectIfNotAdmin
+class RedirectIfNotUser
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,8 @@ class RedirectIfNotAdmin
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::guard('admin')->check()) {
-            return redirect()->route('login-admin');
+        if (!Auth::guard('users')->check()) {
+            return redirect()->route('login-user');
         }
 
         return $next($request);

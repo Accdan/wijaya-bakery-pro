@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Middleware\Authenticate;
+use App\Http\Middleware\RedirectIfNotAdmin;
+use App\Http\Middleware\RedirectIfNotUser;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -16,9 +19,10 @@ return Application::configure(basePath: dirname(__DIR__))
         //     \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         // ]);
 
-        // $middleware->alias([
-        //     'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
-        // ]);
+        $middleware->alias([
+            'admin' => RedirectIfNotAdmin::class,
+            'users' => RedirectIfNotUser::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
