@@ -68,4 +68,8 @@ Route::name('users')->middleware('users')->group(function () {
     Route::get('/menu/{id}/detail', [MenuController::class, 'detail'])->name('menu.detail');
 });
 
+Route::get('/test-translate', function () {
+    return view('test-translate');
+});
+
 require base_path('routes/api.php');

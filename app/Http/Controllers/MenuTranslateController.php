@@ -14,14 +14,12 @@ class MenuTranslateController extends Controller
     {
         $menu = Menu::findOrFail($id);
 
-        $existing = MenuTranslation::where('menu_id', $menu->id)
-                    ->where('lang', 'en')
-                    ->first();
+        $existing = MenuTranslation::where('menu_id', $menu->id)->where('lang', 'en')->first();
 
         if ($existing) {
             return response()->json([
                 'status' => 'cached',
-                'data' => $existing
+                'data' => $existing,
             ]);
         }
 
@@ -30,7 +28,6 @@ class MenuTranslateController extends Controller
         $translatedProsedur = $this->translateToEnglish($menu->prosedur);
 
         $translation = MenuTranslation::create([
-            'id' => Str::uuid(),
             'menu_id' => $menu->id,
             'lang' => 'en',
             'nama_menu' => $translatedNama,
@@ -40,7 +37,7 @@ class MenuTranslateController extends Controller
 
         return response()->json([
             'status' => 'translated',
-            'data' => $translation
+            'data' => $translation,
         ]);
     }
 
@@ -50,7 +47,8 @@ class MenuTranslateController extends Controller
             'q' => $text,
             'source' => 'id',
             'target' => 'en',
-            'format' => 'text'
+            'format' => 'text',
+            'api_key' => '',
         ]);
 
         if ($response->successful()) {

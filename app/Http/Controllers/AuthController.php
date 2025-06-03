@@ -36,7 +36,7 @@ class AuthController extends Controller
         Auth::guard('users')->login($user);
         $request->session()->regenerate();
 
-        return redirect()->intended('/dashboard-user');
+        return redirect()->intended('/homepage');
     }
 
     public function showRegisterForm()
