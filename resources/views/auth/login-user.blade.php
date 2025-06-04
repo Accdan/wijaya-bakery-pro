@@ -72,6 +72,13 @@
                     <div class="d-grid">
                         <button type="submit" class="btn btn-warning text-dark">Masuk</button>
                     </div>
+
+                    <div class="d-grid mt-3">
+                        <a href="{{ url('auth-google-redirect') }}" class="btn btn-light">
+                            <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Logo" style="width:20px; height:20px; margin-right:8px;">
+                            Masuk dengan Google
+                        </a>
+                    </div>
                 </form>
 
                 <div class="text-center mt-3">

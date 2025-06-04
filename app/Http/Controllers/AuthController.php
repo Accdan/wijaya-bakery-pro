@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
@@ -84,6 +86,18 @@ class AuthController extends Controller
         ]);
 
         return redirect()->route('login')->with('success', 'Registrasi berhasil! Silakan login.');
+    }
+
+    public function googleRedirect()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function googleCallback()
+    {
+        $googleUser = Socialite::driver('google')->user();
+        // dd($googleUser);
+        Log::info('Google User', (array) $googleUser);
     }
 
     public function showAdminLoginForm()

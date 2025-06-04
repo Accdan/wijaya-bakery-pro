@@ -30,6 +30,9 @@ Route::post('/login-user', [AuthController::class, 'userLogin']);
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 
+Route::get('/auth-google-redirect', [AuthController::class, 'googleRedirect']);
+Route::get('/auth-google-callback', [AuthController::class, 'googleCallback']);
+
 Route::get('/login-admin', [AuthController::class, 'showAdminLoginForm'])->name('login-admin');
 Route::post('/login-admin', [AuthController::class, 'adminLogin'])->name('login-admin.post');
 

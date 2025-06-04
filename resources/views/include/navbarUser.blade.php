@@ -9,6 +9,7 @@
             <ul class="navbar-nav mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" href="{{ url('/homepage') }}">Beranda</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('/dashboard-user') }}">Menu</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Kategori</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Profil</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Resep</a></li>
                 <form action="{{ route('logout') }}" method="POST" class="d-inline">
