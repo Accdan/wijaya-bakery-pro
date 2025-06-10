@@ -13,9 +13,9 @@
                 <ul class="navbar-nav align-items-lg-center gap-2">
                     <li class="nav-item"><a class="nav-link" href="{{ url('/homepage') }}">Beranda</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ url('/dashboard-user') }}">Menu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Kategori</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Profil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/kategori-list') }}">Kategori</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Resep</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Profil</a></li>
                     <li class="nav-item">
                         <form action="{{ route('logout') }}" method="POST" class="d-inline">
                             @csrf

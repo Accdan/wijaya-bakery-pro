@@ -95,33 +95,10 @@
     </style>
 </head>
 <body>
-{{-- Floating Navbar --}}
-<nav class="navbar navbar-expand-lg floating-navbar">
-    <div class="container-fluid">
-        <a class="navbar-brand fw-bold text-warning" href="#">
-            🍳 Dapur <span class="text-danger">Indonesia</span>
-        </a>
-
-        <!-- Custom Toggler -->
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-            <i class="bi bi-list fs-2 text-dark"></i>
-        </button>
-
-        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-            <ul class="navbar-nav mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
-                <li class="nav-item"><a class="nav-link" href="#menu">Tentang</a></li>
-                <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('/login-user') }}">Login</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ url('/register') }}">Register</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
+@include('include.navbar')
 
 <!-- Hero Section dengan Grid Layout -->
-<section class="container my-5">
+<section class="container pt-5 mt-5 pb-5">
     <div class="row g-4">
         <!-- Kolom Kiri: Carousel dan Info Singkat -->
         <div class="col-lg-8">

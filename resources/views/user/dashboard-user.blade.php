@@ -75,81 +75,54 @@
             box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.1);
         }
 
-    .carousel-wrapper {
-        height: 400px;
-        overflow: hidden;
-    }
-
-    .carousel-inner,
-    .carousel-item {
-        height: 100%;
-    }
-
-    .carousel-item > img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
-    }
-
-    .carousel-item {
-        height: 100%;
-    }
-
-
-    .carousel-caption h1 {
-        font-size: 2rem;
-    }
-
-    .carousel-caption p {
-        font-size: 1rem;
-    }
-
+        .carousel-wrapper {
+            height: 60vh;
+            max-height: 600px;
+        }
+        .carousel-item > img {
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
 
     @include('include.navbarUser')
 
-<!-- Hero Carousel -->
-<section class="carousel-wrapper py-3 px-2">
-    <div id="carouselExample" class="carousel slide carousel-fade h-100" data-bs-ride="carousel">
-        <div class="carousel-inner h-100 rounded-4 overflow-hidden shadow">
-            @foreach ([
-                ['image' => 'slide1.jpg', 'title' => 'Selamat Datang di Dapur Indonesia', 'desc' => 'Temukan berbagai resep nusantara yang menggoda selera'],
-                ['image' => 'slide2.jpg', 'title' => 'Resep Masakan Nusantara', 'desc' => 'Setiap masakan membawa cerita dan kenangan'],
-                ['image' => 'slide3.jpg', 'title' => 'Inspirasi Dapur Anda', 'desc' => 'Resep inovatif untuk semua kesempatan'],
-            ] as $index => $slide)
-                <div class="carousel-item position-relative {{ $index === 0 ? 'active' : '' }}">
-                    <img src="{{ asset('image/' . $slide['image']) }}" 
-                         class="d-block w-100 h-100" 
-                         alt="Slide {{ $index + 1 }}">
-                    <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3 px-3 py-2">
-                        <h1 class="fw-bold">{{ $slide['title'] }}</h1>
-                        <p>{{ $slide['desc'] }}</p>
+    <!-- Hero Carousel -->
+    <section class="carousel-wrapper">
+        <div id="carouselExample" class="carousel slide carousel-fade h-100" data-bs-ride="carousel">
+            <div class="carousel-inner h-100">
+                @foreach ([
+                    ['image' => 'slide1.jpg', 'title' => 'Selamat Datang di Dapur Indonesia', 'desc' => 'Temukan berbagai resep nusantara yang menggoda selera'],
+                    ['image' => 'slide2.jpg', 'title' => 'Resep Masakan Nusantara', 'desc' => 'Setiap masakan membawa cerita dan kenangan'],
+                    ['image' => 'slide3.jpg', 'title' => 'Inspirasi Dapur Anda', 'desc' => 'Resep inovatif untuk semua kesempatan'],
+                ] as $index => $slide)
+                    <div class="carousel-item h-100 position-relative {{ $index === 0 ? 'active' : '' }}">
+                        <img src="{{ asset('image/' . $slide['image']) }}" class="d-block w-100 h-100 object-fit-cover" alt="Slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1>{{ $slide['title'] }}</h1>
+                            <p>{{ $slide['desc'] }}</p>
+                        </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
         </div>
-
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </button>
-    </div>
-</section>
-
-
+    </section>
 
     <div class="container mb-5">
         <h2 class="text-center fw-bold mb-4">🍽 Menu Masakan Favorit</h2>
 
-        <div class="row g-3">
+        <div class="row g-4">
             @foreach ($menus ?? [] as $menu)
-            <div class="col-sm-6 col-md-4 col-lg-3">
-                <div class="card shadow-sm h-100" style="font-size: 0.95rem;">
+            <div class="col-md-6 col-lg-3">
+                <div class="card shadow-sm h-100">
                     <img src="{{ asset('uploads/menu/' . $menu['image']) }}" class="card-img-top" alt="{{ $menu['title'] }}" style="height: 220px; object-fit: cover;">
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title">{{ $menu['title'] }}</h5>

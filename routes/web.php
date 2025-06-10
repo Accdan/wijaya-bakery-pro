@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RoleController;
@@ -10,22 +11,20 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\LikesController;
 use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\IngredientsController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\DashboardUserController;
-
-// Import middleware IsAdmin
-use App\Http\Middleware\IsAdmin;
-use App\Http\Middleware\RedirectIfNotAdmin;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('/home', [HomeController::class, 'index']);
+Route::get('/about', [AboutController::class, 'index']);
+Route::get('/contact', [ContactController::class, 'index']);
 
 Route::get('/login-user', [AuthController::class, 'showUserLoginForm'])->name('login-user');
-// Route::get('/login-user', [AuthController::class, 'showUserLoginForm'])->name('login');
 Route::post('/login-user', [AuthController::class, 'userLogin']);
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
@@ -40,7 +39,6 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::resource('menu', MenuController::class);
 
-// Group route admin dengan middleware auth + isAdmin
 Route::name('admin.')->middleware('admin')->group(function () {
     Route::get('/dashboard-admin', [DashboardController::class, 'index'])->name('dashboard.admin');
 
@@ -69,6 +67,8 @@ Route::name('users')->middleware('users')->group(function () {
     Route::get('/dashboard-user', [DashboardUserController::class, 'index'])->name('users.dashboard.user');
     Route::get('/menu/{id}', [MenuController::class, 'show'])->name('menu.show');
     Route::get('/menu/{id}/detail', [MenuController::class, 'detail'])->name('menu.detail');
+    Route::get('/kategori-list', [DashboardUserController::class, 'kategoriList'])->name('user.kategori-list');
+    Route::get('/kategori/{id}', [DashboardUserController::class, 'menuByKategori'])->name('user.menu-by-kategori');
 });
 
 Route::get('/test-translate', function () {

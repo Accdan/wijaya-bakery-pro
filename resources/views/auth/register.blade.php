@@ -11,24 +11,19 @@
             background: url('{{ asset('image/random2.jpg') }}') no-repeat center center fixed;
             background-size: cover;
         }
-
         .card {
             backdrop-filter: blur(5px);
             background-color: rgba(0, 0, 0, 0.6);
             color: white;
             max-width: 500px;
         }
-
-        /* Step content */
         .step {
             display: none;
             animation: fadeIn 0.4s ease-in-out;
         }
-
         .step.active {
             display: block;
         }
-
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -39,8 +34,6 @@
                 transform: translateY(0);
             }
         }
-
-        /* Dropzone style */
         .dropzone {
             border: 2px dashed #ffc107;
             padding: 20px;
@@ -50,30 +43,23 @@
             border-radius: 8px;
             transition: background-color 0.3s;
         }
-
         .dropzone.hover {
             background-color: rgba(255, 193, 7, 0.15);
         }
-
         .dropzone img {
             max-width: 100px;
             margin-top: 10px;
             border-radius: 50%;
         }
-
-        /* Progress bar & steps icons container */
         .step-tracker {
             position: relative;
             height: 60px;
             margin-bottom: 1.5rem;
         }
-
         .step-tracker .progress {
             height: 6px;
             border-radius: 10px;
         }
-
-        /* Step icons */
         .step-icon {
             position: absolute;
             top: -18px;
@@ -92,7 +78,6 @@
             transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
             user-select: none;
         }
-
         .step-icon.active {
             background-color: #ffc107;
             color: #212529;
@@ -100,14 +85,11 @@
             box-shadow: 0 0 12px rgba(255, 193, 7, 0.9);
             font-weight: 900;
         }
-
         .step-icon.completed {
             background-color: #28a745;
             color: white;
             box-shadow: 0 0 12px rgba(40, 167, 69, 0.9);
         }
-
-        /* Position step icons evenly on progress bar */
         .step-icon[data-step="0"] {
             left: 0%;
         }
@@ -126,7 +108,6 @@
 <body>
     <div class="d-flex align-items-center justify-content-center min-vh-100">
         <div class="card shadow border-0 p-4 w-100">
-            {{-- Logo --}}
             <div class="text-center mb-3">
                 <img src="{{ asset('image/logo1.png') }}" alt="Logo Dapur Indonesia" class="img-fluid" style="max-height: 100px" />
             </div>
@@ -147,6 +128,8 @@
             {{-- Registration Form --}}
             <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data" novalidate>
                 @csrf
+
+                <input type="hidden" name="step" id="stepInput" value="{{ old('step', 0) }}">
 
                 {{-- Step 1: Nama Lengkap --}}
                 <div class="step active">
@@ -244,14 +227,13 @@
         let currentStep = 0;
 
         function showStep(index) {
+            document.getElementById('stepInput').value = index;
             steps.forEach((step, i) => {
                 step.classList.toggle('active', i === index);
             });
 
-            // Tampilkan tombol Prev hanya jika bukan step pertama
             prevBtn.classList.toggle('d-none', index === 0);
 
-            // Jika di step terakhir, sembunyikan tombol Next dan tampilkan Submit
             if (index === steps.length - 1) {
                 nextBtn.style.display = 'none';
                 submitContainer.style.display = 'block';
@@ -260,10 +242,8 @@
                 submitContainer.style.display = 'none';
             }
 
-            // Update progress bar width
             progressBar.style.width = ((index + 1) / steps.length) * 100 + '%';
 
-            // Update step icons style
             stepIcons.forEach((icon, i) => {
                 icon.classList.remove('active', 'completed');
                 if (i < index) icon.classList.add('completed');
@@ -272,7 +252,6 @@
         }
 
         nextBtn.addEventListener('click', () => {
-            // Basic validation: required inputs on current step
             const currentInputs = steps[currentStep].querySelectorAll('input[required]');
             let valid = true;
             currentInputs.forEach(input => {
@@ -298,10 +277,8 @@
             }
         });
 
-        // Initialize
         showStep(currentStep);
 
-        // Dropzone file preview
         const dropzone = document.getElementById('dropzone');
         const fileInput = document.getElementById('profile_picture');
         const previewImage = document.getElementById('previewImage');
@@ -336,52 +313,40 @@
             }
         });
 
-        // function showPreview(file) {
-        //     if (!file.type.startsWith('image/')) return;
-        //     const reader = new FileReader();
-        //     reader.onload = e => {
-        //         previewImage.src = e.target.result;
-        //         previewImage.classList.remove('d-none');
-        //     };
-        //     reader.readAsDataURL(file);
-        // }
         function showPreview(file) {
-    const maxSize = 2 * 1024 * 1024; // 2MB
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+            const maxSize = 2 * 1024 * 1024;
+            const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
 
-    if (!allowedTypes.includes(file.type)) {
-        alert("Hanya file JPG, PNG, dan WebP yang diperbolehkan.");
-        return;
-    }
+            if (!allowedTypes.includes(file.type)) {
+                alert("Hanya file JPG, PNG, dan WebP yang diperbolehkan.");
+                return;
+            }
 
-    if (file.size > maxSize) {
-        alert("Ukuran gambar maksimal 2MB.");
-        return;
-    }
+            if (file.size > maxSize) {
+                alert("Ukuran gambar maksimal 2MB.");
+                return;
+            }
 
-    const reader = new FileReader();
-    reader.onload = e => {
-        previewImage.src = e.target.result;
-        previewImage.classList.remove('d-none');
-    };
-    reader.readAsDataURL(file);
-}
-
+            const reader = new FileReader();
+            reader.onload = e => {
+                previewImage.src = e.target.result;
+                previewImage.classList.remove('d-none');
+            };
+            reader.readAsDataURL(file);
+        }
 
         const serverErrors = {
-        name: "{{ $errors->has('name') ? '1' : '' }}",
-        email: "{{ $errors->has('email') ? '1' : '' }}",
-        username: "{{ $errors->has('username') ? '1' : '' }}",
-        password: "{{ $errors->has('password') ? '1' : '' }}"
-    };
+            name: "{{ $errors->has('name') ? '1' : '' }}",
+            email: "{{ $errors->has('email') ? '1' : '' }}",
+            username: "{{ $errors->has('username') ? '1' : '' }}",
+            password: "{{ $errors->has('password') ? '1' : '' }}"
+        };
 
-    // Arahkan user langsung ke step error
-    document.addEventListener('DOMContentLoaded', () => {
-        if (serverErrors.name) currentStep = 0;
-        else if (serverErrors.email) currentStep = 1;
-        else if (serverErrors.username || serverErrors.password) currentStep = 2;
-        showStep(currentStep);
-    });
+        document.addEventListener('DOMContentLoaded', () => {
+            const oldStep = parseInt("{{ old('step', 0) }}", 10);
+            currentStep = isNaN(oldStep) ? 0 : oldStep;
+            showStep(currentStep);
+        });
     </script>
 </body>
 </html>

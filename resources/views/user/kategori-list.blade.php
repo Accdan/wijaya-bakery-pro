@@ -6,6 +6,7 @@
     <title>Dapur Indonesia</title>
     <link rel="icon" type="image/png" href="{{ asset('image/icondapur.jpg') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@300;600;800&display=swap" rel="stylesheet">
 
@@ -73,6 +74,15 @@
             transform: translateY(-5px);
             box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.1);
         }
+
+        .carousel-wrapper {
+            height: 60vh;
+            max-height: 600px;
+        }
+        .carousel-item > img {
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
@@ -80,7 +90,7 @@
     @include('include.navbarUser')
 
     <!-- Hero Carousel -->
-    <section class="vh-100">
+    <section class="carousel-wrapper">
         <div id="carouselExample" class="carousel slide carousel-fade h-100" data-bs-ride="carousel">
             <div class="carousel-inner h-100">
                 @foreach ([
@@ -106,24 +116,49 @@
         </div>
     </section>
 
-    <div class="container my-5">
-        <div class="row g-4 text-center">
-            @foreach([
-                ['icon' => 'fas fa-user', 'title' => 'Profil Saya', 'btn' => 'Lihat', 'url' => '#'],
-                ['icon' => 'fas fa-shopping-basket', 'title' => 'Pesanan', 'btn' => 'Lihat', 'url' => '#'],
-                ['icon' => 'fas fa-bell', 'title' => 'Notifikasi', 'btn' => 'Cek', 'url' => '#'],
-                ['icon' => 'fas fa-plus-circle', 'title' => 'Ajukan Resep', 'btn' => 'Buat', 'url' => '#'],
-            ] as $card)
-                <div class="col-md-6 col-lg-3">
-                    <div class="card custom-card h-100 text-center shadow-sm border-0 hover-shadow">
-                        <div class="card-body d-flex flex-column align-items-center justify-content-center p-4">
-                            <i class="{{ $card['icon'] }} text-primary mb-3" style="font-size: 2.5rem;"></i>
-                            <h5 class="fw-semibold mb-3">{{ $card['title'] }}</h5>
-                            <a href="{{ $card['url'] }}" class="btn btn-outline-primary btn-sm rounded-pill px-4 mt-auto">{{ $card['btn'] }}</a>
+    <div class="container mb-5">
+        <h2 class="text-center fw-bold mb-4">Kategori Resep Makanan</h2>
+
+        <div class="row g-4">
+            @foreach ($kategoris as $item)
+            <div class="col-md-6 col-lg-3">
+                <div class="card shadow-sm h-100 custom-card text-center p-3">
+                    <div class="card-body d-flex flex-column justify-content-center">
+                        <h5 class="card-title">{{ $item->nama_kategori }}</h5>
+                        <a href="{{ url('/kategori/{id}') }}" class="btn btn-outline-warning mt-3">Lihat Daftar Resep</a>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+
+    <!-- Modal Detail -->
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold" id="detailModalLabel">Detail Resep Masakan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-4 align-items-start">
+                        <div class="col-md-6">
+                            <img id="detailImage" src="" alt="" class="img-fluid rounded shadow-sm w-100" style="max-height: 300px; object-fit: cover;">
+                        </div>
+                        <div class="col-md-6">
+                            <h4 id="detailTitle" class="fw-semibold mb-3"></h4>
+                            <p id="detailDesc" class="text-muted"></p>
+                            <a id="detailLink" href="#" class="btn btn-warning w-100 mt-3">
+                                <i class="bi bi-book-open"></i> Lihat Resep Lengkap
+                            </a>
                         </div>
                     </div>
                 </div>
-            @endforeach
+                <div class="modal-footer border-0 pt-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -138,7 +173,44 @@
             document.getElementById('detailDesc').textContent = button.getAttribute('data-desc');
             document.getElementById('detailImage').src = button.getAttribute('data-image');
             document.getElementById('detailImage').alt = button.getAttribute('data-title');
+            document.getElementById('detailLink').href = button.getAttribute('data-detail-url');
         });
+
+        document.querySelectorAll('.like-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            btn.classList.toggle('liked');
+            const icon = btn.querySelector('i');
+            const countSpan = btn.nextElementSibling;
+            let count = parseInt(countSpan.textContent);
+            if (btn.classList.contains('liked')) {
+                icon.classList.replace('bi-star', 'bi-star-fill');
+                count++;
+            } else {
+                icon.classList.replace('bi-star-fill', 'bi-star');
+                count--;
+            }
+            countSpan.textContent = count;
+        });
+    });
+
+    document.querySelectorAll('.btn-submit-comment').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const parent = btn.closest('.collapse');
+            const input = parent.querySelector('.comment-input');
+            const commentsSection = parent.querySelector('.comments-section');
+            const text = input.value.trim();
+            if (text === '') return alert('Komentar tidak boleh kosong!');
+            const newComment = document.createElement('div');
+            newComment.innerHTML = `<strong>Anda:</strong> ${text}`;
+            commentsSection.appendChild(newComment);
+            input.value = '';
+
+            const commentBtn = parent.previousElementSibling.querySelector('.comment-btn');
+            const match = commentBtn.innerText.match(/\((\d+)\)/);
+            let current = match ? parseInt(match[1]) : 0;
+            commentBtn.innerHTML = `<i class="bi bi-chat-left-text"></i> (${current + 1})`;
+        });
+    });
     </script>
 </body>
 </html>

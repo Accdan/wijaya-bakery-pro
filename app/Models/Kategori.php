@@ -43,6 +43,9 @@ class Kategori extends Model
     {
         return $this->delete();
     }
-   
 
+    public function menus()
+    {
+        return $this->hasMany(Menu::class, 'kategori_id');
+    }
 }

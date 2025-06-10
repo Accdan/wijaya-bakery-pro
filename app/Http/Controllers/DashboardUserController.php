@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Menu;
+use App\Models\Kategori;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,5 +35,17 @@ class DashboardUserController extends Controller
     public function homepage()
     {
         return view('user.homepage');
+    }
+
+    public function kategoriList()
+    {
+        $kategoris = Kategori::all();
+        return view('user.kategori-list', compact('kategoris'));
+    }
+
+    public function menuByKategori($id)
+    {
+        $kategori = Kategori::with('menus')->findOrFail($id); // ambil kategori & semua menunya
+        return view('user.menu-by-kategori', compact('kategori'));
     }
 }
