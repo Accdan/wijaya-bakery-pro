@@ -72,6 +72,35 @@
             transform: translateY(-5px);
             box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.1);
         }
+
+                .carousel-minimalist {
+            height: 50vh; /* set tinggi carousel jadi setengah layar */
+            max-height: 400px; /* batas maksimal tinggi */
+            min-height: 300px; /* batas minimal tinggi */
+            position: relative;
+        }
+
+        .carousel-minimalist .carousel-caption {
+            bottom: 1rem;
+            text-shadow: none;
+            background: rgba(255, 255, 255, 0.7); /* background putih transparan */
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            color: #333;
+            max-width: 60%;
+        }
+
+        .carousel-minimalist .carousel-caption h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'Pacifico', cursive;
+        }
+
+        .carousel-minimalist .carousel-caption p {
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
     </style>
 </head>
 <body>
@@ -79,31 +108,37 @@
     @include('include.navbarUser')
 
     <!-- Hero Carousel -->
-    <section class="vh-100">
+    <section class="carousel-wrapper py-3 px-2">
         <div id="carouselExample" class="carousel slide carousel-fade h-100" data-bs-ride="carousel">
-            <div class="carousel-inner h-100">
+            <div class="carousel-inner h-100 rounded-4 overflow-hidden shadow">
                 @foreach ([
                     ['image' => 'slide1.jpg', 'title' => 'Selamat Datang di Dapur Indonesia', 'desc' => 'Temukan berbagai resep nusantara yang menggoda selera'],
                     ['image' => 'slide2.jpg', 'title' => 'Resep Masakan Nusantara', 'desc' => 'Setiap masakan membawa cerita dan kenangan'],
                     ['image' => 'slide3.jpg', 'title' => 'Inspirasi Dapur Anda', 'desc' => 'Resep inovatif untuk semua kesempatan'],
                 ] as $index => $slide)
-                    <div class="carousel-item h-100 position-relative {{ $index === 0 ? 'active' : '' }}">
-                        <img src="{{ asset('image/' . $slide['image']) }}" class="d-block w-100 h-100 object-fit-cover" alt="Slide">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h1>{{ $slide['title'] }}</h1>
+                    <div class="carousel-item position-relative {{ $index === 0 ? 'active' : '' }}">
+                        <img src="{{ asset('image/' . $slide['image']) }}" 
+                             class="d-block w-100 h-100 object-fit-cover" 
+                             alt="Slide {{ $index + 1 }}">
+                        <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3 px-3 py-2">
+                            <h1 class="fw-bold">{{ $slide['title'] }}</h1>
                             <p>{{ $slide['desc'] }}</p>
                         </div>
                     </div>
                 @endforeach
             </div>
+    
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon"></span>
+                <span class="visually-hidden">Sebelumnya</span>
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
                 <span class="carousel-control-next-icon"></span>
+                <span class="visually-hidden">Selanjutnya</span>
             </button>
         </div>
     </section>
+F    
 
     <div class="container my-5">
         <div class="row g-4 text-center">
