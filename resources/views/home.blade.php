@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dapur Indonesia</title>
     <link rel="icon" type="image/png" href="{{ asset('image/icondapur.jpg') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@300;600;800&display=swap" rel="stylesheet">
 
@@ -61,55 +62,125 @@
         .object-fit-cover {
             object-fit: cover;
         }
+
+        .carousel-wrapper {
+        height: 400px;
+        overflow: hidden;
+    }
+
+    .carousel-inner,
+    .carousel-item {
+        height: 100%;
+    }
+
+    .carousel-item > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .carousel-item {
+        height: 100%;
+    }
+
+
+    .carousel-caption h1 {
+        font-size: 2rem;
+    }
+
+    .carousel-caption p {
+        font-size: 1rem;
+    }
     </style>
 </head>
 <body>
+{{-- Floating Navbar --}}
+<nav class="navbar navbar-expand-lg floating-navbar">
+    <div class="container-fluid">
+        <a class="navbar-brand fw-bold text-warning" href="#">
+            🍳 Dapur <span class="text-danger">Indonesia</span>
+        </a>
 
-    {{-- Floating Navbar --}}
-    <nav class="navbar navbar-expand-lg floating-navbar">
-        <div class="container-fluid d-flex justify-content-between align-items-center">
-            <a class="navbar-brand" href="#">Dapur Indonesia</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                <ul class="navbar-nav mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#menu">Tentang</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/login-user') }}">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/register') }}">Register</a></li>
-                </ul>
-            </div>
+        <!-- Custom Toggler -->
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+            <i class="bi bi-list fs-2 text-dark"></i>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+                <li class="nav-item"><a class="nav-link" href="#menu">Tentang</a></li>
+                <li class="nav-item"><a class="nav-link" href="#kontak">Kontak</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('/login-user') }}">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url('/register') }}">Register</a></li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <!-- Hero Carousel -->
-    <section class="vh-100">
-        <div id="carouselExample" class="carousel slide carousel-fade h-100" data-bs-ride="carousel">
-            <div class="carousel-inner h-100">
-                @foreach ([
-                    ['image' => 'hero-bg.jpg', 'title' => 'Selamat Datang di Dapur Indonesia', 'desc' => 'Temukan berbagai resep nusantara yang menggoda selera'],
-                    ['image' => 'random1.jpg', 'title' => 'Resep Masakan Nusantara', 'desc' => 'Setiap masakan membawa cerita dan kenangan'],
-                    ['image' => 'random2.jpg', 'title' => 'Inspirasi Dapur Anda', 'desc' => 'Resep inovatif untuk semua kesempatan'],
-                ] as $index => $slide)
-                    <div class="carousel-item h-100 position-relative {{ $index === 0 ? 'active' : '' }}">
-                        <img src="{{ asset('image/' . $slide['image']) }}" class="d-block w-100 h-100 object-fit-cover" alt="Slide">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h1>{{ $slide['title'] }}</h1>
-                            <p>{{ $slide['desc'] }}</p>
-                        </div>
+
+<!-- Hero Section dengan Grid Layout -->
+<section class="container my-5">
+    <div class="row g-4">
+        <!-- Kolom Kiri: Carousel dan Info Singkat -->
+        <div class="col-lg-8">
+            <!-- Carousel -->
+            <div class="carousel-wrapper mb-3">
+                <div id="carouselExample" class="carousel slide carousel-fade h-100" data-bs-ride="carousel">
+                    <div class="carousel-inner h-100 rounded-4 overflow-hidden shadow">
+                        @foreach ([
+                            ['image' => 'slide1.jpg', 'title' => 'Selamat Datang di Dapur Indonesia', 'desc' => 'Temukan berbagai resep nusantara yang menggoda selera'],
+                            ['image' => 'slide2.jpg', 'title' => 'Resep Masakan Nusantara', 'desc' => 'Setiap masakan membawa cerita dan kenangan'],
+                            ['image' => 'slide3.jpg', 'title' => 'Inspirasi Dapur Anda', 'desc' => 'Resep inovatif untuk semua kesempatan'],
+                        ] as $index => $slide)
+                            <div class="carousel-item position-relative {{ $index === 0 ? 'active' : '' }}">
+                                <img src="{{ asset('image/' . $slide['image']) }}"
+                                     class="d-block w-100 h-100"
+                                     alt="Slide {{ $index + 1 }}">
+                                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded-3 px-3 py-2">
+                                    <h1 class="fw-bold">{{ $slide['title'] }}</h1>
+                                    <p>{{ $slide['desc'] }}</p>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                @endforeach
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </button>
+
+            <!-- Informasi Singkat -->
+            <div class="bg-light rounded-4 shadow-sm p-4">
+                <h4 class="fw-bold text-danger">Tentang Website Ini</h4>
+                <p class="mb-0 text-muted">
+                    Dapur Indonesia adalah platform resep masakan nusantara yang menyajikan berbagai hidangan tradisional hingga modern.
+                    Temukan inspirasi masakan harian Anda dan bagikan resep favorit bersama komunitas pecinta kuliner!
+                </p>
+            </div>
         </div>
-    </section>
+
+        <!-- Kolom Kanan: Membership Info -->
+        <div class="col-lg-4">
+            <div class="bg-warning-subtle rounded-4 shadow-sm p-4 h-100">
+                <h4 class="fw-bold text-warning">👥 Membership</h4>
+                <p class="text-muted">Bergabunglah menjadi anggota Dapur Indonesia dan nikmati:</p>
+                <ul class="list-unstyled text-muted">
+                    <li>✔ Akses penuh ke ribuan resep</li>
+                    <li>✔ Simpan resep favorit Anda</li>
+                    <li>✔ Bagikan resep kreasi sendiri</li>
+                    <li>✔ Ikuti event dan kompetisi masak</li>
+                </ul>
+                <a href="{{ url('/register') }}" class="btn btn-warning w-100 fw-semibold mt-3">Daftar Sekarang</a>
+            </div>
+        </div>
+    </div>
+</section>
+
 
     <!-- Menu Section -->
     <section id="menu" class="container my-5">
@@ -119,22 +190,22 @@
         </div>
         <div class="row g-4">
             @forelse ($menus as $menu)
-                <div class="col-md-6 col-lg-4">
+            <div class="col-sm-6 col-md-4 col-lg-3">
                     <div class="card h-100 border-0 shadow-sm hover-shadow">
                         <img src="{{ $menu->gambar_menu ? asset('uploads/menu/' . $menu->gambar_menu) : asset('image/default.jpg') }}"
-                            class="card-img-top rounded-top"
-                            alt="{{ $menu->nama_menu }}"
-                            style="height: 230px; object-fit: cover;">
+                             class="card-img-top rounded-top"
+                             alt="{{ $menu->nama_menu }}"
+                             style="height: 230px; object-fit: cover;">
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title fw-bold text-dark">{{ $menu->nama_menu }}</h5>
                             <p class="card-text text-muted mb-4">{{ \Illuminate\Support\Str::limit($menu->deskripsi_menu, 80) }}</p>
                             <button class="btn btn-warning mt-auto w-100 fw-semibold shadow-sm"
-                                data-bs-toggle="modal"
-                                data-bs-target="#detailModal"
-                                data-id="{{ $menu->id }}"
-                                data-title="{{ $menu->nama_menu }}"
-                                data-desc="{{ $menu->deskripsi_menu }}"
-                                data-image="{{ $menu->gambar_menu ? asset('uploads/menu/' . $menu->gambar_menu) : asset('image/default.jpg') }}">
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#detailModal"
+                                    data-id="{{ $menu->id }}"
+                                    data-title="{{ $menu->nama_menu }}"
+                                    data-desc="{{ $menu->deskripsi_menu }}"
+                                    data-image="{{ $menu->gambar_menu ? asset('uploads/menu/' . $menu->gambar_menu) : asset('image/default.jpg') }}">
                                 🍽 Lihat Detail Resep
                             </button>
                         </div>
@@ -188,6 +259,7 @@
         </div>
     </div>
 
+    {{-- Footer --}}
     @include('include.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
