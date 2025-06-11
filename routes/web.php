@@ -15,6 +15,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\IngredientsController;
 use App\Http\Controllers\TagsController;
 use App\Http\Controllers\DashboardUserController;
+use App\Http\Controllers\SponsorController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,6 +39,7 @@ Route::post('/login-admin', [AuthController::class, 'adminLogin'])->name('login-
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::resource('menu', MenuController::class);
+Route::resource('sponsor', SponsorController::class);
 
 Route::name('admin.')->middleware('admin')->group(function () {
     Route::get('/dashboard-admin', [DashboardController::class, 'index'])->name('dashboard.admin');
