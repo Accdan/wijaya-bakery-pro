@@ -64,26 +64,14 @@
                                 <p>Kategori Resep</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ url('ingredients') }}" class="nav-link {{ request()->is('ingredients*') ? 'active-custom-sub' : '' }}">
-                                <i class="fas fa-carrot nav-icon"></i>
-                                <p>Bahan Masakan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('admin.tags.index') }}" class="nav-link {{ request()->is('tags*') ? 'active-custom-sub' : '' }}">
-                                <i class="fas fa-tags nav-icon"></i>
-                                <p>Tag Resep</p>
-                            </a>
-                        </li>
                     </ul>
                 </li>
 
-                <!-- Pengaturan -->
+                <!-- Manajemen Sponsor -->
                 <li class="nav-item">
-                    <a href="{{ url('pengaturan') }}" class="nav-link {{ request()->is('pengaturan') ? 'active-custom' : '' }}">
-                        <i class="nav-icon fas fa-cogs"></i>
-                        <p>Pengaturan</p>
+                    <a href="{{ url('sponsor') }}" class="nav-link {{ request()->is('pengaturan') ? 'active-custom' : '' }}">
+                        <i class="fas fa-handshake nav-icon"></i>
+                        <p>Sponsor</p>
                     </a>
                 </li>
             </ul>

@@ -44,7 +44,7 @@ class MenuController extends Controller
         $menu->id = (string) \Illuminate\Support\Str::uuid();
         $menu->save();
 
-        return redirect()->route('menu.index')->with('success', 'Menu berhasil ditambahkan!');
+        return redirect()->route('admin.menu.index')->with('success', 'Menu berhasil ditambahkan!');
     }
 
 
@@ -85,7 +85,7 @@ class MenuController extends Controller
 
         $menu->save();
 
-        return redirect()->route('menu.index')->with('success', 'Menu berhasil diperbarui.');
+        return redirect()->route('admin.menu.index')->with('success', 'Menu berhasil diperbarui.');
     }
 
 
@@ -102,25 +102,6 @@ class MenuController extends Controller
 
         return redirect()->route('admin.menu.index')->with('success', 'Menu berhasil dihapus.');
     }
-
-    public function attachTag(Request $request, $menuId)
-    {
-        $request->validate([
-            'tag_id' => 'required|exists:tags,id',
-        ]);
-
-        MenuTag::attachTagToMenu($menuId, $request->tag_id);
-
-        return back()->with('success', 'Tag berhasil ditambahkan ke menu.');
-    }
-
-    public function detachTag($menuId, $tagId)
-    {
-        MenuTag::detachTagFromMenu($menuId, $tagId);
-
-        return back()->with('success', 'Tag berhasil dihapus dari menu.');
-    }
-
     public function detail($id)
     {
         $menu = Menu::findOrFail($id);

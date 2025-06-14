@@ -31,7 +31,7 @@
                     <div class="card">
                         <div class="card-header d-flex justify-content-between align-items-center">
                             <h3 class="card-title">Daftar Menu</h3>
-                            <a href="{{ route('menu.create') }}" class="btn btn-primary btn-sm ml-auto">
+                            <a href="{{ route('admin.menu.create') }}" class="btn btn-primary btn-sm ml-auto">
                                 <i class="fas fa-plus"></i> Tambah Menu
                             </a>
                         </div>
@@ -65,10 +65,10 @@
                                                     @endif
                                                 </td> --}}
                                                 <td class="text-center">
-                                                    <a href="{{ route('menu.show', $menu->id) }}" class="btn btn-info btn-sm">
+                                                    <a href="{{ route('admin.menu.show', $menu->id) }}" class="btn btn-info btn-sm">
                                                         <i class="fas fa-eye"></i> Detail
                                                     </a>
-                                                    <a href="{{ route('menu.edit', $menu->id) }}" class="btn btn-warning btn-sm">
+                                                    <a href="{{ route('admin.menu.edit', $menu->id) }}" class="btn btn-warning btn-sm">
                                                         <i class="fas fa-edit"></i> Edit
                                                     </a>
                                                     <button class="btn btn-danger btn-sm delete-menu-btn"
