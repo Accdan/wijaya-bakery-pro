@@ -24,7 +24,6 @@
                 </div>
             </div>
         </div>
-
         <section class="content">
             <div class="container-fluid">
                 <div class="card shadow">

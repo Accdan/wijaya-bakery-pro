@@ -66,12 +66,16 @@
                         </li>
                     </ul>
                 </li>
-
-                <!-- Manajemen Sponsor -->
                 <li class="nav-item">
                     <a href="{{ url('sponsor') }}" class="nav-link {{ request()->is('pengaturan') ? 'active-custom' : '' }}">
                         <i class="fas fa-handshake nav-icon"></i>
                         <p>Sponsor</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url('promo') }}" class="nav-link {{ request()->is('pengaturan') ? 'active-custom' : '' }}">
+                        <i class="fas fa-gift nav-icon"></i>
+                        <p>Promo</p>
                     </a>
                 </li>
             </ul>

@@ -3,15 +3,16 @@
 use App\Http\Controllers\AboutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\RoleController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\KategoriController;
-use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashboardUserController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MenuController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\SponsorController;
+use App\Http\Controllers\PromoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -41,6 +42,7 @@ Route::name('admin.')->middleware('admin')->group(function () {
     Route::resource('role', RoleController::class);
     Route::post('role/{id}/toggle-status', [RoleController::class, 'toggleStatus'])->name('role.toggleStatus');
     
+    Route::resource('promo', PromoController::class);
     Route::resource('user', UserController::class);
     Route::resource('menu', MenuController::class);
     Route::resource('sponsor', SponsorController::class);
