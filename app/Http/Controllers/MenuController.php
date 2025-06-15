@@ -91,7 +91,7 @@ class MenuController extends Controller
 
     public function show($id)
     {
-        $menu = Menu::with(['kategori', 'ingredients'])->findOrFail($id);
+        $menu = Menu::with(['kategori'])->findOrFail($id);
         return view('admin.menu.show', compact('menu'));
     }
 

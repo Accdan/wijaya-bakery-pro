@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Kategori;
 
 class Menu extends Model
 {
@@ -62,34 +62,4 @@ class Menu extends Model
         return $this->delete();
     }
 
-    public function ingredients()
-    {
-        return $this->hasMany(Ingredients::class, 'menu_id');
-    }
-
-    public function likes()
-    {
-        return $this->hasMany(Likes::class, 'menu_id');
-    }
-
-    public function comments()
-    {
-        return $this->hasMany(Comments::class, 'menu_id')->latest();
-    }
-
-    public function likedByUser()
-    {
-        if (!Auth::check()) return false;
-        return $this->likes()->where('user_id', Auth::id())->exists();
-    }
-
-    public function tags()
-    {
-        return $this->belongsToMany(Tags::class, 'menu_tag')->withTimestamps();
-    }
-
-    public function translations()
-    {
-        return $this->hasMany(MenuTranslation::class);
-    }
 }

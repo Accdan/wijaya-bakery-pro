@@ -9,11 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\MenuController;
-use App\Http\Controllers\LikesController;
-use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\IngredientsController;
-use App\Http\Controllers\TagsController;
 use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\SponsorController;
 
@@ -38,30 +34,17 @@ Route::post('/login-admin', [AuthController::class, 'adminLogin'])->name('login-
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::resource('menu', MenuController::class);
-Route::resource('sponsor', SponsorController::class);
 
 Route::name('admin.')->middleware('admin')->group(function () {
     Route::get('/dashboard-admin', [DashboardController::class, 'index'])->name('dashboard.admin');
-
+    
     Route::resource('role', RoleController::class);
     Route::post('role/{id}/toggle-status', [RoleController::class, 'toggleStatus'])->name('role.toggleStatus');
-
+    
     Route::resource('user', UserController::class);
-
+    Route::resource('menu', MenuController::class);
+    Route::resource('sponsor', SponsorController::class);
     Route::resource('kategori', KategoriController::class);
-
-    Route::post('/menu/{id}/like', [LikesController::class, 'toggle'])->name('menu.like');
-    Route::post('/comments', [CommentsController::class, 'store'])->name('comments.store');
-    Route::put('/comments/{id}', [CommentsController::class, 'update'])->name('comments.update');
-    Route::delete('/comments/{id}', [CommentsController::class, 'destroy'])->name('comments.destroy');
-
-    Route::get('/ingredients/menu/{menu_id}', [IngredientsController::class, 'indexByMenu']);
-    Route::post('/ingredients', [IngredientsController::class, 'store']);
-    Route::put('/ingredients/{id}', [IngredientsController::class, 'update']);
-    Route::delete('/ingredients/{id}', [IngredientsController::class, 'destroy']);
-
-    Route::resource('tags', TagsController::class);
 });
 
 Route::name('users')->middleware('users')->group(function () {
