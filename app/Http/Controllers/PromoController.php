@@ -22,18 +22,20 @@ class PromoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_promo'     => 'required|string|max:255',
-            'deskripsi_promo'      => 'nullable|string',
-            'gambar_promo'   => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'status'         => 'required|boolean',
+            'nama_promo'       => 'required|string|max:255',
+            'deskripsi_promo'  => 'nullable|string',
+            'gambar_promo'     => 'required|image|mimes:jpg,jpeg,png,webp|max:2048', // WAJIB SAAT TAMBAH
+            'status'           => 'required|boolean',
         ]);
 
-        $data = $request->only([
-            'nama_promo',
-            'deskripsi_promo',
-            'gambar_promo',
-            'status',
-        ]);
+        $data = $request->only(['nama_promo', 'deskripsi_promo', 'status']);
+
+        if ($request->hasFile('gambar_promo')) {
+            $file = $request->file('gambar_promo');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/promo'), $filename);
+            $data['gambar_promo'] = $filename;
+        }
 
         $promo = new Promo($data);
         $promo->id = (string) Str::uuid();
@@ -53,18 +55,27 @@ class PromoController extends Controller
         $promo = Promo::findOrFail($id);
 
         $request->validate([
-            'nama_promo'     => 'required|string|max:255',
-            'deskripsi_promo'      => 'nullable|string',
-            'gambar_promo'   => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'status'         => 'required|boolean',
+            'nama_promo'       => 'required|string|max:255',
+            'deskripsi_promo'  => 'nullable|string',
+            'gambar_promo'     => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048', // OPSIONAL SAAT EDIT
+            'status'           => 'required|boolean',
         ]);
 
-        $promo->update([
-            'nama_promo'     => $request->nama_promo,
-            'deskripsi_promo'=> $request->deskripsi_promo,
-            'gambar_promo'   => $request->gambar_promo,
-            'status'         => $request->status,
-        ]);
+        $data = $request->only(['nama_promo', 'deskripsi_promo', 'status']);
+
+        if ($request->hasFile('gambar_promo')) {
+            // Hapus gambar lama jika ada
+            if ($promo->gambar_promo && file_exists(public_path('uploads/promo/' . $promo->gambar_promo))) {
+                unlink(public_path('uploads/promo/' . $promo->gambar_promo));
+            }
+
+            $file = $request->file('gambar_promo');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/promo'), $filename);
+            $data['gambar_promo'] = $filename;
+        }
+
+        $promo->update($data);
 
         return redirect()->route('admin.promo.index')->with('success', 'Promo berhasil diperbarui!');
     }
@@ -72,6 +83,11 @@ class PromoController extends Controller
     public function destroy($id)
     {
         $promo = Promo::findOrFail($id);
+
+        if ($promo->gambar_promo && file_exists(public_path('uploads/promo/' . $promo->gambar_promo))) {
+            unlink(public_path('uploads/promo/' . $promo->gambar_promo));
+        }
+
         $promo->delete();
 
         return redirect()->route('admin.promo.index')->with('success', 'Promo berhasil dihapus.');
