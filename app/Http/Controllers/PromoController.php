@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Promo;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
 class PromoController extends Controller
@@ -84,8 +85,9 @@ class PromoController extends Controller
     {
         $promo = Promo::findOrFail($id);
 
-        if ($promo->gambar_promo && file_exists(public_path('uploads/promo/' . $promo->gambar_promo))) {
-            unlink(public_path('uploads/promo/' . $promo->gambar_promo));
+        $path = public_path('uploads/promo/' . $promo->gambar);
+        if ($promo->gambar_promo && File::exists($path)) {
+            File::delete($path);
         }
 
         $promo->delete();

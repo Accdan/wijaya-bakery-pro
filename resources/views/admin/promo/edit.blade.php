@@ -52,7 +52,7 @@
                             <div class="form-group">
                                 <label for="deskripsi"><i class="fas fa-info-circle"></i> Deskripsi</label>
                                 <textarea class="form-control @error('deskripsi') is-invalid @enderror"
-                                          name="deskripsi_promo" rows="3">{{ old('deskripsi_promo', $promo->deskripsi) }}</textarea>
+                                          name="deskripsi_promo" rows="3">{{ old('deskripsi_promo', $promo->deskripsi_promo) }}</textarea>
                                 @error('deskripsi')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror

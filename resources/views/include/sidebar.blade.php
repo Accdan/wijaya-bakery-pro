@@ -1,6 +1,6 @@
 <aside class="main-sidebar elevation-4" style="background: linear-gradient(180deg, #2d3d56, #1c2636);">
     <!-- Logo -->
-    <a href="#" class="brand-link d-flex justify-content-center align-items-center" style="background: linear-gradient(180deg, #2d3d56, #1c2636);">
+    <a href="{{ url('dashboard-admin') }}" class="brand-link d-flex justify-content-center align-items-center" style="background: linear-gradient(180deg, #2d3d56, #1c2636);">
         <img src="{{ asset('image/logo1.png') }}" alt="Logo Resep" class="brand-image" style="max-width: 180px; max-height: 120px; object-fit: contain;">
     </a>
 
@@ -12,13 +12,13 @@
                 <!-- Dashboard -->
                 <li class="nav-item">
                     <a href="{{ url('dashboard-admin') }}" class="nav-link {{ request()->is('dashboard') ? 'active-custom' : '' }}">
-                        <i class="nav-icon fas fa-home"></i>
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
 
                 <!-- Manajemen Pengguna -->
-                <li class="nav-item has-treeview {{ request()->is('user*') || request()->is('role*') ? 'menu-open' : '' }}">
+                {{-- <li class="nav-item has-treeview {{ request()->is('user*') || request()->is('role*') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ request()->is('user*') || request()->is('role*') ? 'active-custom' : '' }}">
                         <i class="nav-icon fas fa-users-cog"></i>
                         <p>
@@ -40,14 +40,14 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
 
                 <!-- Manajemen Resep -->
                 <li class="nav-item has-treeview {{ request()->is('menu*') || request()->is('kategori*') || request()->is('ingredients*') || request()->is('tags*') ? 'menu-open' : '' }}">
                     <a href="#" class="nav-link {{ request()->is('menu*') || request()->is('kategori*') || request()->is('ingredients*') || request()->is('tags*') ? 'active-custom' : '' }}">
                         <i class="nav-icon fas fa-utensils"></i>
                         <p>
-                            Manajemen Resep
+                            Manajemen Menu
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -55,25 +55,48 @@
                         <li class="nav-item">
                             <a href="{{ url('menu') }}" class="nav-link {{ request()->is('menu*') ? 'active-custom-sub' : '' }}">
                                 <i class="fas fa-book nav-icon"></i>
-                                <p>Kelola Resep</p>
+                                <p>Kelola Menu</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ url('kategori') }}" class="nav-link {{ request()->is('kategori*') ? 'active-custom-sub' : '' }}">
                                 <i class="fas fa-th-large nav-icon"></i>
-                                <p>Kategori Resep</p>
+                                <p>Kategori Menu</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item has-treeview {{ request()->is('menu*') || request()->is('kategori*') || request()->is('ingredients*') || request()->is('tags*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->is('menu*') || request()->is('kategori*') || request()->is('ingredients*') || request()->is('tags*') ? 'active-custom' : '' }}">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            Homepage setting
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ url('hero') }}" class="nav-link {{ request()->is('hero') ? 'active-custom' : '' }}">
+                                <i class="fas fa-image nav-icon"></i>
+                                <p>Landing Pict</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('about_contact') }}" class="nav-link {{ request()->is('about&kontak') ? 'active-custom' : '' }}">
+                                <i class="custom-icon fas fa-info-circle"></i>
+                                <p>About & Contact</p>
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('sponsor') }}" class="nav-link {{ request()->is('pengaturan') ? 'active-custom' : '' }}">
+                    <a href="{{ url('sponsor') }}" class="nav-link {{ request()->is('sponsor') ? 'active-custom' : '' }}">
                         <i class="fas fa-handshake nav-icon"></i>
                         <p>Sponsor</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('promo') }}" class="nav-link {{ request()->is('pengaturan') ? 'active-custom' : '' }}">
+                    <a href="{{ url('promo') }}" class="nav-link {{ request()->is('promo') ? 'active-custom' : '' }}">
                         <i class="fas fa-gift nav-icon"></i>
                         <p>Promo</p>
                     </a>

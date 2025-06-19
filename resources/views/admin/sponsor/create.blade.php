@@ -53,6 +53,32 @@
 
                                 <div class="form-group">
                                     <label for="logo_sponsor">Logo Sponsor</label>
+                                    <table class="table table-bordered table-striped">
+                                        <thead class="table-dark">
+                                          <tr>
+                                            <th>Platform</th>
+                                            <th>Ukuran Gambar</th>
+                                            <th>Keterangan</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <td>Desktop & Tablet</td>
+                                            <td><strong>300 x 150 px</strong></td>
+                                            <td>Landscape (lebar lebih panjang) — cocok untuk logo umum</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Mobile</td>
+                                            <td><strong>200 x 100 px</strong></td>
+                                            <td>Ukuran lebih kecil untuk performa dan responsive view</td>
+                                          </tr>
+                                          <tr>
+                                            <td>Format disarankan</td>
+                                            <td><code>.png</code> / <code>.webp</code></td>
+                                            <td>Transparan background lebih bagus untuk estetika UI</td>
+                                          </tr>
+                                        </tbody>
+                                      </table>                                      
                                     <input type="file" name="logo_sponsor" class="form-control-file @error('logo_sponsor') is-invalid @enderror" accept="image/*">
                                     @error('logo_sponsor')<div class="text-danger">{{ $message }}</div>@enderror
                                 </div>

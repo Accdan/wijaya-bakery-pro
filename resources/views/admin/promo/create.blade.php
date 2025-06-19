@@ -59,6 +59,33 @@
 
                             <div class="form-group">
                                 <label for="gambar_promo"><i class="fas fa-image"></i> Gambar Promo</label>
+                                <h5>Ukuran Gambar Promo</h5>
+                                    <table class="table table-bordered table-striped">
+                                    <thead class="table-dark">
+                                        <tr>
+                                        <th>Platform</th>
+                                        <th>Ukuran Gambar</th>
+                                        <th>Keterangan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                        <td>Desktop & Tablet</td>
+                                        <td><strong>800 x 400 px</strong></td>
+                                        <td>Format landscape, cocok untuk tampilan carousel</td>
+                                        </tr>
+                                        <tr>
+                                        <td>Mobile</td>
+                                        <td><strong>600 x 300 px</strong></td>
+                                        <td>Ukuran lebih ringan, cepat dimuat di perangkat mobile</td>
+                                        </tr>
+                                        <tr>
+                                        <td>Format disarankan</td>
+                                        <td><code>.jpg</code> / <code>.webp</code></td>
+                                        <td>Resolusi jelas, sebaiknya dikompres tanpa menurunkan kualitas</td>
+                                        </tr>
+                                    </tbody>
+                                    </table>
                                 <input type="file" class="form-control-file @error('gambar_promo') is-invalid @enderror"
                                        name="gambar_promo">
                                 @error('gambar_promo')

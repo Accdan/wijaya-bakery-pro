@@ -12,7 +12,7 @@
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="{{ url('/home') }}">Menu</a></li>
+                <li id="#home" class="nav-item" ><a class="nav-link" href="{{ url('/home') }}">Menu</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('/about') }}">Tentang</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('/contact') }}">Kontak</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url('/login-user') }}">Login</a></li>

@@ -1,0 +1,106 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Hero;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
+
+class HeroController extends Controller
+{
+    public function index()
+    {
+        $heroes = Hero::all();
+        return view('admin.hero.index', compact('heroes'));
+    }
+
+    // Form tambah hero
+    public function create()
+    {
+        return view('admin.hero.create');
+    }
+
+    // Simpan hero baru
+    public function store(Request $request)
+    {
+        $request->validate([
+            'gambar' => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'status' => 'required|boolean',
+        ]);
+
+        $data = $request->only(['status']);
+
+        if ($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+            $filename = time() . '_' . Str::random(8) . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/hero'), $filename);
+            $data['gambar'] = $filename;
+        }
+
+        Hero::create($data);
+
+        return redirect()->route('admin.hero.index')->with('success', 'Hero berhasil ditambahkan!');
+    }
+
+    // Form edit hero
+    public function edit($id)
+    {
+        $hero = Hero::findOrFail($id);
+        return view('admin.hero.edit', compact('hero'));
+    }
+
+    // Simpan perubahan hero
+    public function update(Request $request, $id)
+    {
+        $hero = Hero::findOrFail($id);
+
+        $request->validate([
+            'gambar' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'status' => 'required|boolean',
+        ]);
+
+        $data = $request->only(['status']);
+
+        if ($request->hasFile('gambar')) {
+            // Hapus gambar lama jika ada
+            $oldPath = public_path('uploads/hero/' . $hero->gambar);
+            if ($hero->gambar && File::exists($oldPath)) {
+                File::delete($oldPath);
+            }
+
+            $file = $request->file('gambar');
+            $filename = time() . '_' . Str::random(8) . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads/hero'), $filename);
+            $data['gambar'] = $filename;
+        }
+
+        $hero->update($data);
+
+        return redirect()->route('admin.hero.index')->with('success', 'Hero berhasil diperbarui!');
+    }
+
+    // Hapus hero dan gambar
+    public function destroy($id)
+    {
+        $hero = Hero::findOrFail($id);
+
+        $path = public_path('uploads/hero/' . $hero->gambar);
+        if ($hero->gambar && File::exists($path)) {
+            File::delete($path);
+        }
+
+        $hero->delete();
+
+        return redirect()->route('admin.hero.index')->with('success', 'Hero berhasil dihapus.');
+    }
+
+    // Untuk homepage: tampilkan URL hero aktif
+    public function showHeroImage()
+    {
+        $hero = Hero::where('status', 1)->latest()->first();
+        return $hero && $hero->gambar
+            ? asset('uploads/hero/' . $hero->gambar)
+            : asset('images/hero-bg1.jpeg');
+    }
+}

@@ -56,9 +56,9 @@
                                             <td>{{ $promo->deskripsi_promo ?? '-' }}</td>
                                             <td>
                                                 @if($promo->gambar_promo)
-                                                    <img src="{{ asset('storage/' . $promo->gambar_promo) }}" alt="Gambar Promo" style="height: 50px;">
+                                                    <img src="{{ asset('uploads/promo/' . $promo->gambar_promo) }}" alt="gambar" width="80">
                                                 @else
-                                                    <span class="text-muted">Tidak Ada</span>
+                                                    <span class="text-muted">-</span>
                                                 @endif
                                             </td>
                                             <td>

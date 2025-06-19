@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\File; 
 use Illuminate\Support\Str;
 
 class Promo extends Model
@@ -24,6 +25,15 @@ class Promo extends Model
         static::creating(function ($promo) {
             if (!$promo->id) {
                 $promo->id = (string) Str::uuid();
+            }
+        });
+        // Hapus gambar saat record dihapus
+        static::deleting(function ($promo) {
+        if ($promo->gambar) {
+            $path = public_path('uploads/promo/' . $promo->gambar_promo);
+            if (File::exists($path)) {
+                File::delete($path);
+            }
             }
         });
     }
