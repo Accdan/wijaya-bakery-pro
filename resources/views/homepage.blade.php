@@ -132,10 +132,13 @@
 <section id="about" class="about-us py-5 text-center">
   <div class="container">
     <h2 class="section-title">About us</h2>
-    <p class="mb-4">Bergabunglah di dunia rasa, nikmati sensasi dari roti dan kue terbaik.</p>
+    <p class="mb-4">
+      {!! $data->about_deskripsi ?? '<p>Bergabunglah di dunia rasa, nikmati sensasi dari roti dan kue terbaik.</p>' !!}
+    </p>
     <a href="#" class="btn btn-outline-dark">Read More</a>
   </div>
 </section>
+
 
 <!-- Explore More -->
 <section id="menu" class="py-5 text-center">
@@ -172,7 +175,7 @@
   </div>
   </div>
 </section>
-{{-- Kontak --}}
+
 @if($promos->where('status', 1)->count())
 <section id="promo-grid" class="py-5 text-center bg-light">
   <div class="container">
@@ -196,12 +199,16 @@
 
 
 <!-- Kontak -->
-<section id="contact" class="about-us py-5 text-center">
+<section id="contact" class="contact-us py-5 text-center bg-light">
   <div class="container">
     <h2 class="section-title">Kontak Kami</h2>
-    <p>Hubungi kami untuk informasi lebih lanjut.</p>
+    <div class="mb-4">
+      {!! $data->contact_deskripsi ?? '<p>Silakan hubungi kami untuk pemesanan atau informasi lebih lanjut mengenai produk roti dan kue terbaik dari Wijaya Bakery.</p>' !!}
+    </div>
+    <a href="mailto:info@wijayabakery.com" class="btn btn-outline-primary">Hubungi Kami</a>
   </div>
 </section>
+
 <!-- Sponsor List -->
 @if($sponsors->count())
 <section id="sponsors" class="py-5 text-center about-us">

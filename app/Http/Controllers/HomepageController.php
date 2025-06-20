@@ -6,6 +6,7 @@ use App\Models\Menu;
 use App\Models\Hero;
 use App\Models\Promo;
 use App\Models\Sponsor;
+use App\Models\AboutNContact;
 
 class HomepageController extends Controller
 {
@@ -15,7 +16,8 @@ class HomepageController extends Controller
     $hero = Hero::where('status', 1)->latest()->first();
     $promos = Promo::where('status', 1)->get();
     $sponsors = Sponsor::all();
-    return view('homepage', compact('menus', 'hero', 'promos', 'sponsors'));
+    $data = AboutNContact::first();
+    return view('homepage', compact('menus', 'hero', 'promos', 'sponsors', 'data'));
 }
 
 }
