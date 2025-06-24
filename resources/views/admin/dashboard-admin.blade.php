@@ -155,6 +155,14 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Aktifkan treeview dropdown
+            $('[data-widget="treeview"]').each(function () {
+                AdminLTE.Treeview._jQueryInterface.call($(this));
+            });
+        });
+    </script>
     <script src="{{ asset('resources/js/ToastScript.js') }}"></script>
 
     <script>

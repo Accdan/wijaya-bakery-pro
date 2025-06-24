@@ -6,7 +6,7 @@
     </ul>
 
     <!-- Menempatkan dropdown di kanan -->
-    <ul class="navbar-nav ml-auto">
+    {{-- <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                 <i class="fas fa-user-circle"></i> {{ session('username') }}
@@ -30,5 +30,5 @@
                 </li>
             </ul>
         </li>
-    </ul>
+    </ul> --}}
 </nav>

@@ -18,9 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', [HomeController::class, 'index']);
+// Route::get('/home', [HomeController::class, 'index']);
 Route::get('/homepage', [HomepageController::class, 'index']);
-
 
 Route::get('/login-user', [AuthController::class, 'showUserLoginForm'])->name('login-user');
 Route::post('/login-user', [AuthController::class, 'userLogin']);
@@ -47,7 +46,6 @@ Route::name('admin.')->middleware('admin')->group(function () {
     Route::resource('kategori', KategoriController::class);
     Route::resource('hero', HeroController::class);
     Route::resource('about_contact',AboutContactController::class);
-
 });
 
  Route::name('users')->middleware('users')->group(function () {

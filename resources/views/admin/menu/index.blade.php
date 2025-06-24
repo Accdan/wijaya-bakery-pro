@@ -44,8 +44,6 @@
                                             <th>Nama Menu</th>
                                             <th>Kategori</th>
                                             <th>Deskripsi</th>
-                                            {{-- <th>Prosedur</th> --}}
-                                            {{-- <th>Gambar</th> --}}
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -56,14 +54,6 @@
                                                 <td>{{ $menu->nama_menu }}</td>
                                                 <td>{{ $menu->kategori->nama_kategori ?? '-' }}</td>
                                                 <td>{{ Str::limit($menu->deskripsi_menu, 50) }}</td>
-                                                {{-- <td>{{ Str::limit($menu->prosedur, 50) }}</td> --}}
-                                                {{-- <td>
-                                                    @if($menu->gambar_menu)
-                                                        <img src="{{ asset('storage/' . $menu->gambar_menu) }}" alt="gambar" width="80">
-                                                    @else
-                                                        <span class="text-muted">-</span>
-                                                    @endif
-                                                </td> --}}
                                                 <td class="text-center">
                                                     <a href="{{ route('admin.menu.show', $menu->id) }}" class="btn btn-info btn-sm">
                                                         <i class="fas fa-eye"></i> Detail
