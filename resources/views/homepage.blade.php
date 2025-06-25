@@ -235,20 +235,49 @@
 <footer class="footer py-4 text-white" style="background-color:#3c2f2f">
   <div class="container">
     <div class="row">
+      <!-- About Us -->
       <div class="col-md-4 mb-3">
         <h5>About Us</h5>
-        <p>Telp: (0341) 123-456<br>Alamat: Jl. Roti Manis No.12<br>Email: wijaya@bakery.com</p>
+        <p>
+          Telp: (0341) 123-456<br>
+          Alamat: Jl. Roti Manis No.12<br>
+          Email: wijaya@bakery.com
+        </p>
       </div>
-      <div class="col-md-4">
+
+      <!-- Recent News -->
+      <div class="col-md-4 mb-3">
         <h5>Recent News</h5>
-        <p>- Roti pastry edisi baru<br>- Tart pastry cita rasa unik</p>
+        <p>
+          - Roti pastry edisi baru<br>
+          - Tart pastry cita rasa unik
+        </p>
+      </div>
+
+      <!-- Google Maps -->
+      <div class="col-md-4 mb-3">
+        <h5>Lokasi Kami</h5>
+        <div style="border-radius: 10px; overflow: hidden;">
+          <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31660.44115470185!2d112.71922230720519!3d-7.291346199559281!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fbbe1837258d%3A0x6de4060b6596563f!2sTaman%20Bungkul!5e0!3m2!1sid!2sid!4v1750739264134!5m2!1sid!2sid" 
+          width="400" 
+          height="300" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        </div>
       </div>
     </div>
+
+    <!-- Copyright -->
     <div class="text-center mt-3">
       <small>&copy; 2025 Wijaya Bakery. All rights reserved.</small>
     </div>
   </div>
 </footer>
+
 
 <!-- WhatsApp Button -->
 <a href="https://wa.me/6281234567890" target="_blank" class="whatsapp-float">

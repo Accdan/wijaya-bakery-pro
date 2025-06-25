@@ -84,10 +84,9 @@
                                     </div>
 
                                     <div style="width: 300px; height: 300px; border: 2px dashed #ccc; margin: auto; display: flex; align-items: center; justify-content: center;">
-                                        <img id="preview" src="{{ $menu->gambar_menu ? asset('storage/' . $menu->gambar_menu) : 'https://via.placeholder.com/300x300?text=Preview' }}" class="img-fluid rounded" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                                        <img id="preview" src="{{ $menu->gambar_menu ? asset('uploads/menu/' . $menu->gambar_menu) : 'https://via.placeholder.com/300x300?text=Preview' }}" class="img-fluid rounded" style="max-width: 100%; max-height: 100%; object-fit: contain;">
                                     </div>
-                                    <input type="hidden" name="cropped_image" id="cropped_image">
-                                </div>
+                                    <input type="hidden" name="cropped_image" id="cropped_image">                                    
                             </div>
 
                             <div class="mt-4">
@@ -115,6 +114,26 @@
     const image = document.getElementById('preview');
     const input = document.getElementById('gambar_menu');
 
+    // Inisialisasi cropper saat halaman dibuka dengan gambar lama
+    window.addEventListener('load', () => {
+        cropper = new Cropper(image, {
+            aspectRatio: 1,
+            viewMode: 1,
+            autoCropArea: 1,
+            crop(event) {
+                const canvas = cropper.getCroppedCanvas({ width: 300, height: 300 });
+                canvas.toBlob((blob) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        document.getElementById('cropped_image').value = reader.result;
+                    };
+                    reader.readAsDataURL(blob);
+                });
+            }
+        });
+    });
+
+    // Kalau user pilih gambar baru
     input.addEventListener('change', (e) => {
         const file = e.target.files[0];
         if (!file) return;
@@ -131,12 +150,11 @@
                 crop(event) {
                     const canvas = cropper.getCroppedCanvas({ width: 300, height: 300 });
                     canvas.toBlob((blob) => {
-                        const fileInputElement = document.getElementById('cropped_image');
-                        const fileReader = new FileReader();
-                        fileReader.onloadend = () => {
-                            fileInputElement.value = fileReader.result;
+                        const reader = new FileReader();
+                        reader.onloadend = () => {
+                            document.getElementById('cropped_image').value = reader.result;
                         };
-                        fileReader.readAsDataURL(blob);
+                        reader.readAsDataURL(blob);
                     });
                 }
             });
@@ -144,5 +162,6 @@
         reader.readAsDataURL(file);
     });
 </script>
+
 </body>
 </html>

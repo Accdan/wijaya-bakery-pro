@@ -58,23 +58,42 @@ class SponsorController extends Controller
             'deskripsi_sponsor' => 'required|string',
             'logo_sponsor' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
-
+    
         $sponsor->nama_sponsor = $request->nama_sponsor;
         $sponsor->deskripsi_sponsor = $request->deskripsi_sponsor;
-
-        if ($request->hasFile('logo_sponsor')) {
+    
+        // Proses jika ada gambar hasil crop
+        if ($request->filled('cropped_logo')) {
+            $imageData = $request->input('cropped_logo');
+            $imageData = str_replace('data:image/png;base64,', '', $imageData);
+            $imageData = str_replace(' ', '+', $imageData);
+    
+            $imageName = time() . '_logo.png';
+            $imagePath = public_path('uploads/sponsor/' . $imageName);
+    
+            // Hapus file lama
             if ($sponsor->logo_sponsor && file_exists(public_path('uploads/sponsor/' . $sponsor->logo_sponsor))) {
-                unlink(public_path('uploads/sponsor/' . $sponsor->gambar_menu));
+                unlink(public_path('uploads/sponsor/' . $sponsor->logo_sponsor));
             }
-
+    
+            // Simpan hasil crop
+            file_put_contents($imagePath, base64_decode($imageData));
+            $sponsor->logo_sponsor = $imageName;
+        }
+        // Atau kalau user upload langsung file baru (tanpa crop)
+        elseif ($request->hasFile('logo_sponsor')) {
+            if ($sponsor->logo_sponsor && file_exists(public_path('uploads/sponsor/' . $sponsor->logo_sponsor))) {
+                unlink(public_path('uploads/sponsor/' . $sponsor->logo_sponsor));
+            }
+    
             $file = $request->file('logo_sponsor');
             $filename = time() . '_' . $file->getClientOriginalName();
             $file->move(public_path('uploads/sponsor'), $filename);
             $sponsor->logo_sponsor = $filename;
         }
-
+    
         $sponsor->save();
-
+    
         return redirect()->route('admin.sponsor.index')->with('success', 'Sponsor berhasil diperbarui.');
     }
 

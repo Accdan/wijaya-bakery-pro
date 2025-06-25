@@ -20,7 +20,7 @@
                     <img src="{{ asset('image/logo1.png') }}" alt="Logo Dapur Indonesia" class="img-fluid" style="max-height: 100px;">
                 </div>
 
-                <h4 class="text-center text-warning mb-3">Sistem Manajemen Dapur Indonesia</h4>
+                <h4 class="text-center text-warning mb-3">Sistem Manajemen PRODUK PKM</h4>
                 <p class="text-center text-light mb-4">Masuk sebagai Admin untuk mengelola resep dan konten</p>
 
                 @if(session('error'))

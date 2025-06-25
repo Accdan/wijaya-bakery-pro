@@ -67,7 +67,7 @@
                                                 </span>
                                             </td>
                                             <td class="text-center">
-                                                <a href="{{ route('admin.promo.edit', $promo->id) }}" class="btn btn-info btn-sm">
+                                                <a href="{{ route('admin.promo.edit', $promo->id) }}" class="btn btn-warning btn-sm">
                                                     <i class="fas fa-edit"></i> Edit
                                                 </a>
                                                 <button class="btn btn-danger btn-sm delete-promo-btn"

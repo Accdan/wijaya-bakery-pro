@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Dapur Indonesia</title>
+    <title>Login - TOKO ROTI</title>
     <link rel="icon" type="image/png" href="{{ asset('image/icondapur.jpg') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -20,8 +20,8 @@
                     <img src="{{ asset('image/logo1.png') }}" alt="Logo Dapur Indonesia" class="img-fluid" style="max-height: 100px;">
                 </div>
 
-                <h4 class="text-center text-warning mb-3">Sistem Manajemen Dapur Indonesia</h4>
-                <p class="text-center text-light mb-4">Masuk sebagai Admin untuk mengelola resep dan konten</p>
+                <h4 class="text-center text-warning mb-3">PRODUK PKM TOKO ROTI</h4>
+                <p class="text-center text-light mb-4">Masuk sebagai Admin</p>
 
                 @if(session('error'))
                     <div class="alert alert-danger">

@@ -56,19 +56,17 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-6 text-center">
-                                    <div class="form-group">
-                                        <label for="logo">Logo Sponsor</label>
-                                        <input type="file" name="logo_input" id="logo" class="form-control-file @error('logo') is-invalid @enderror" accept="image/*">
-                                        @error('logo')<div class="text-danger">{{ $message }}</div>@enderror
-                                    </div>
-
-                                    <div style="width: 300px; height: 300px; border: 2px dashed #ccc; margin: auto; display: flex; align-items: center; justify-content: center;">
-                                        <img id="preview" src="{{ $sponsor->logo ? asset('storage/' . $sponsor->logo) : 'https://via.placeholder.com/300x300?text=Preview' }}" class="img-fluid rounded" style="max-width: 100%; max-height: 100%; object-fit: contain;">
-                                    </div>
-                                    <input type="hidden" name="cropped_logo" id="cropped_logo">
+                                <div class="form-group">
+                                    <label for="logo">Logo Sponsor</label>
+                                    <input type="file" name="logo_sponsor" id="logo" class="form-control-file @error('logo_sponsor') is-invalid @enderror" accept="image/*">
+                                    @error('logo_sponsor')<div class="text-danger">{{ $message }}</div>@enderror
                                 </div>
-                            </div>
+                                
+                                <div style="width: 300px; height: 300px; border: 2px dashed #ccc; margin: auto; display: flex; align-items: center; justify-content: center;">
+                                    <img id="preview" src="{{ $sponsor->logo_sponsor ? asset('uploads/sponsor/' . $sponsor->logo_sponsor) : 'https://via.placeholder.com/300x300?text=Preview' }}" class="img-fluid rounded" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                                </div>
+                                <input type="hidden" name="cropped_logo" id="cropped_logo">
+                                
 
                             <div class="mt-4">
                                 <button type="submit" class="btn btn-warning"><i class="fas fa-save"></i> Simpan Perubahan</button>

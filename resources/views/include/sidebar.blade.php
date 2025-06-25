@@ -9,6 +9,7 @@
         <!-- Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                
                 <!-- Dashboard -->
                 <li class="nav-item">
                     <a href="{{ url('dashboard-admin') }}" class="nav-link {{ request()->is('dashboard') ? 'active-custom' : '' }}">
@@ -16,35 +17,16 @@
                         <p>Dashboard</p>
                     </a>
                 </li>
-
-                <!-- Manajemen Pengguna -->
-                {{-- <li class="nav-item has-treeview {{ request()->is('user*') || request()->is('role*') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->is('user*') || request()->is('role*') ? 'active-custom' : '' }}">
-                        <i class="nav-icon fas fa-users-cog"></i>
-                        <p>
-                            Pengguna & Akses
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
+                <li class="nav-item">
+                    <a href="{{ url('homepage') }}" class="nav-link {{ request()->is('dashboard') ? 'active-custom' : '' }}">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>Homepage</p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('admin.role.index') }}" class="nav-link {{ request()->is('role*') ? 'active-custom-sub' : '' }}">
-                                <i class="fas fa-user-shield nav-icon"></i>
-                                <p>Peran Pengguna</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ url('user') }}" class="nav-link {{ request()->is('user*') ? 'active-custom-sub' : '' }}">
-                                <i class="fas fa-user nav-icon"></i>
-                                <p>Data Pengguna</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li> --}}
+                </li>
 
-                <!-- Manajemen Resep -->
-                <li class="nav-item has-treeview {{ request()->is('menu*') || request()->is('kategori*') || request()->is('ingredients*') || request()->is('tags*') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->is('menu*') || request()->is('kategori*') || request()->is('ingredients*') || request()->is('tags*') ? 'active-custom' : '' }}">
+                <!-- Manajemen Menu (Dropdown) -->
+                <li class="nav-item has-treeview {{ request()->is('menu*') || request()->is('kategori*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->is('menu*') || request()->is('kategori*') ? 'active-custom' : '' }}">
                         <i class="nav-icon fas fa-utensils"></i>
                         <p>
                             Manajemen Menu
@@ -66,35 +48,41 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item has-treeview {{ request()->is('menu*') || request()->is('kategori*') || request()->is('ingredients*') || request()->is('tags*') ? 'menu-open' : '' }}">
-                    <a href="#" class="nav-link {{ request()->is('menu*') || request()->is('kategori*') || request()->is('ingredients*') || request()->is('tags*') ? 'active-custom' : '' }}">
+
+                <!-- Homepage Setting -->
+                <li class="nav-item has-treeview {{ request()->is('hero') || request()->is('about_contact') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->is('hero') || request()->is('about_contact') ? 'active-custom' : '' }}">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
-                            Homepage setting
+                            Homepage Setting
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ url('hero') }}" class="nav-link {{ request()->is('hero') ? 'active-custom' : '' }}">
+                            <a href="{{ url('hero') }}" class="nav-link {{ request()->is('hero') ? 'active-custom-sub' : '' }}">
                                 <i class="fas fa-image nav-icon"></i>
                                 <p>Landing Pict</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ url('about_contact') }}" class="nav-link {{ request()->is('about&kontak') ? 'active-custom' : '' }}">
-                                <i class="custom-icon fas fa-info-circle"></i>
+                            <a href="{{ url('about_contact') }}" class="nav-link {{ request()->is('about_contact') ? 'active-custom-sub' : '' }}">
+                                <i class="fas fa-info-circle nav-icon"></i>
                                 <p>About & Contact</p>
                             </a>
                         </li>
                     </ul>
                 </li>
+
+                <!-- Sponsor -->
                 <li class="nav-item">
                     <a href="{{ url('sponsor') }}" class="nav-link {{ request()->is('sponsor') ? 'active-custom' : '' }}">
                         <i class="fas fa-handshake nav-icon"></i>
                         <p>Sponsor</p>
                     </a>
                 </li>
+
+                <!-- Promo -->
                 <li class="nav-item">
                     <a href="{{ url('promo') }}" class="nav-link {{ request()->is('promo') ? 'active-custom' : '' }}">
                         <i class="fas fa-gift nav-icon"></i>
@@ -108,47 +96,52 @@
 
 <style>
     .nav-sidebar .nav-item:hover {
-        background-color: #3f4f6b;
-        border-radius: 5px;
-        transition: background-color 0.3s ease;
-    }
+    background-color: #3f4f6b;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
 
-    .nav-sidebar .nav-link .nav-icon {
-        font-size: 18px;
-        color: #e0e0e0;
-        transition: color 0.3s ease;
-    }
+.nav-sidebar .nav-link .nav-icon {
+    font-size: 18px;
+    color: #e0e0e0;
+    transition: color 0.3s ease;
+}
 
-    .nav-sidebar .nav-link:hover .nav-icon {
-        color: #a3ffac;
-    }
+.nav-sidebar .nav-link:hover .nav-icon {
+    color: #a3ffac;
+}
 
-    .nav-sidebar .nav-link {
-        padding: 12px 15px;
-        font-size: 16px;
-        color: #f8f9fa;
-    }
+.nav-sidebar .nav-link {
+    padding: 12px 15px;
+    font-size: 16px;
+    color: #f8f9fa;
+}
 
-    .nav-treeview .nav-link {
-        font-size: 15px;
-        padding-left: 30px;
-    }
+.nav-treeview .nav-link {
+    font-size: 15px;
+    padding-left: 30px;
+}
 
-    /* Aktif styling */
-    .active-custom {
-        background: linear-gradient(to right, #4e73df, #1cc88a) !important;
-        color: #fff !important;
-        border-radius: 5px;
-    }
+/* Aktif menu */
+.active-custom {
+    color: #28d07a !important;
+    background-color: rgba(40, 208, 122, 0.15) !important;
+    border-left: 4px solid #28d07a;
+    font-weight: 600;
+}
 
-    .active-custom-sub {
-        background-color: rgba(255, 255, 255, 0.15) !important;
-        color: #ffffff !important;
-        border-left: 4px solid #1cc88a;
-        font-weight: bold;
-    }
+/* Aktif submenu */
+.active-custom-sub {
+    color: #28d07a !important;
+    background-color: rgba(40, 208, 122, 0.1) !important;
+    font-weight: 600;
+    border-left: 3px solid #28d07a;
+}
 
-    .nav-link.active-custom-sub .nav-icon {
-        color: #1cc88a !important;
-    }
+/* Ikon */
+.nav-link.active-custom .nav-icon,
+.nav-link.active-custom-sub .nav-icon {
+    color: #28d07a !important;
+}
+
 </style>
