@@ -57,10 +57,9 @@ class Hero extends Model
         ]);
     }
 
-    // DELETE (manual trigger + hapus cache opsional)
+   
     public function deleteHero()
     {
-        // Hapus data (event deleting otomatis akan hapus file)
         return $this->delete();
     }
 

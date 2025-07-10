@@ -14,14 +14,11 @@ class HeroController extends Controller
         $heroes = Hero::all();
         return view('admin.hero.index', compact('heroes'));
     }
-
-    // Form tambah hero
     public function create()
     {
         return view('admin.hero.create');
     }
 
-    // Simpan hero baru
     public function store(Request $request)
     {
         $request->validate([
@@ -43,14 +40,12 @@ class HeroController extends Controller
         return redirect()->route('admin.hero.index')->with('success', 'Hero berhasil ditambahkan!');
     }
 
-    // Form edit hero
     public function edit($id)
     {
         $hero = Hero::findOrFail($id);
         return view('admin.hero.edit', compact('hero'));
     }
 
-    // Simpan perubahan hero
     public function update(Request $request, $id)
     {
         $hero = Hero::findOrFail($id);
@@ -63,7 +58,6 @@ class HeroController extends Controller
         $data = $request->only(['status']);
 
         if ($request->hasFile('gambar')) {
-            // Hapus gambar lama jika ada
             $oldPath = public_path('uploads/hero/' . $hero->gambar);
             if ($hero->gambar && File::exists($oldPath)) {
                 File::delete($oldPath);
@@ -79,23 +73,31 @@ class HeroController extends Controller
 
         return redirect()->route('admin.hero.index')->with('success', 'Hero berhasil diperbarui!');
     }
-
-    // Hapus hero dan gambar
-    public function destroy($id)
-    {
-        $hero = Hero::findOrFail($id);
-
-        $path = public_path('uploads/hero/' . $hero->gambar);
-        if ($hero->gambar && File::exists($path)) {
-            File::delete($path);
-        }
-
-        $hero->delete();
-
-        return redirect()->route('admin.hero.index')->with('success', 'Hero berhasil dihapus.');
+public function destroy($id){
+    $hero = Hero::findOrFail($id);
+    if ($hero->gambar && file_exists(public_path('uploads/hero/' . $hero->gambar))) {
+        unlink(public_path('uploads/hero/' . $hero->gambar));
     }
 
-    // Untuk homepage: tampilkan URL hero aktif
+    $hero->delete();
+
+    return redirect()->route('admin.hero.index')->with('success', 'Hero berhasil dihapus.');
+}
+
+    // public function destroy($id)
+    // {
+    //     $hero = Hero::findOrFail($id);
+
+    //     $path = public_path('uploads/hero/' . $hero->gambar);
+    //     if ($hero->gambar && File::exists($path)) {
+    //         File::delete($path);
+    //     }
+
+    //     $hero->delete();
+
+    //     return redirect()->route('admin.hero.index')->with('success', 'Hero berhasil dihapus.');
+    // }
+
     public function showHeroImage()
     {
         $hero = Hero::where('status', 1)->latest()->first();

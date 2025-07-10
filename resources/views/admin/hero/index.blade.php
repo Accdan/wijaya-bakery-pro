@@ -65,10 +65,11 @@
                                             <a href="{{ route('admin.hero.edit', $hero->id) }}" class="btn btn-info btn-sm">
                                                 <i class="fas fa-edit"></i> Edit
                                             </a>
-                                            <button class="btn btn-danger btn-sm delete-hero-btn"
+                                            <button type="button"
+                                                    class="btn btn-danger btn-sm delete-hero-btn"
                                                     data-toggle="modal"
                                                     data-target="#deleteHeroModal"
-                                                    data-hero-id="{{ $hero->id }}">
+                                                    data-id="{{ $hero->id }}">
                                                 <i class="fas fa-trash"></i> Hapus
                                             </button>
                                         </td>
@@ -132,10 +133,11 @@
         });
 
         $('.delete-hero-btn').click(function () {
-            let heroId = $(this).data('hero-id');
-            let deleteUrl = "{{ url('admin/hero') }}/" + heroId;
-            $('#deleteHeroForm').attr('action', deleteUrl);
-        });
+        let heroId = $(this).data('id');
+        let deleteUrl = "{{ route('admin.hero.destroy', '__id__') }}".replace('__id__', heroId);
+        $('#deleteHeroForm').attr('action', deleteUrl);
+    });
+
 
         @if (session('success') || session('error'))
         $('#toastNotification').toast({
@@ -147,4 +149,3 @@
 </script>
 </body>
 </html>
-

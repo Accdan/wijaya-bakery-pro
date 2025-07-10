@@ -18,7 +18,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('homepage') }}" class="nav-link {{ request()->is('dashboard') ? 'active-custom' : '' }}">
+                    <a href="{{ url('/') }}" class="nav-link {{ request()->is('dashboard') ? 'active-custom' : '' }}">
                         <i class="nav-icon fas fa-home"></i>
                         <p>Homepage</p>
                     </a>
