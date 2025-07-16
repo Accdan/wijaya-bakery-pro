@@ -4,19 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Wijaya Bakery</title>
-  <link rel="icon" href="{{ asset('image/logo.png') }}">
+  <link rel="icon" href="{{ asset('image/logo1.png') }}">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@300;600;800&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --cream: #E7EFC7;
+      --sage: #AEC8A4;
+      --brown: #8A784E;
+      --dark-brown: #3B3B1A;
+    }
+
     body {
       font-family: 'Nunito', sans-serif;
-      background-color: #fff9f5;
-      color: #3c2f2f;
+      background-color: var(--cream);
+      color: var(--dark-brown);
     }
 
     h1, h2, h3, h4 {
       font-family: 'Pacifico', cursive;
+      color: var(--dark-brown);
     }
 
     .hero {
@@ -29,16 +37,46 @@
       align-items: center;
       text-align: center;
       padding: 0 1rem;
+      position: relative;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
     }
 
     .hero h1 {
-      font-size: 5rem;
+      font-size: 4.5rem;
       align-self: flex-start;
       margin-left: 5%;
+      color: #E7EFC7;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      position: relative;
+      z-index: 1;
     }
 
-    .about-us, .promo, .footer {
-      background-color: #fef1e6;
+    .hero .lead {
+      font-size: 1.5rem;
+      color: #E7EFC7;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      position: relative;
+      z-index: 1;
+      align-self: flex-start;
+      margin-left: 5%;
+      margin-top: 1rem;
+    }
+
+    .about-us, .promo {
+      background-color: var(--sage);
+    }
+
+    .footer {
+      background-color: #3B3B1A;
     }
 
     .section-title {
@@ -99,19 +137,35 @@
 <body>
 
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="background-color: #3B3B1A; padding: 1rem 0;">
   <div class="container">
-    <a class="navbar-brand text-danger fw-bold" href="#">Wijaya Bakery</a>
-    <div>
-      <ul class="navbar-nav ms-auto flex-row">
-        <li class="nav-item"><a class="nav-link scroll-link" href="#hero">Home</a></li>
-        <li class="nav-item"><a class="nav-link scroll-link" href="#about">Tentang</a></li>
-        <li class="nav-item"><a class="nav-link scroll-link" href="#menu">Menu</a></li>
-        <li class="nav-item"><a class="nav-link scroll-link" href="#contact">Kontak</a></li>
+    <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
+      <img src="{{ asset('image/logo1.png') }}" alt="Wijaya Bakery Logo" width="50" height="50" class="me-2">
+      <span style="color: #E7EFC7; font-size: 1.5rem;">Wijaya <span style="color: #AEC8A4">Bakery</span></span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav gap-3">
+        <li class="nav-item">
+          <a class="nav-link active" href="#hero" style="color: #E7EFC7; font-weight: 600; font-size: 1.1rem; padding: 0.5rem 1rem;">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#about" style="color: #E7EFC7; font-weight: 600; font-size: 1.1rem; padding: 0.5rem 1rem;">Tentang</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#menu" style="color: #E7EFC7; font-weight: 600; font-size: 1.1rem; padding: 0.5rem 1rem;">Menu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contact" style="color: #E7EFC7; font-weight: 600; font-size: 1.1rem; padding: 0.5rem 1rem;">Kontak</a>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
+
 
 <!-- Hero -->
 @php
@@ -129,50 +183,59 @@
 
 
 <!-- About Section -->
-<section id="about" class="about-us py-5 text-center">
+<section id="about" class="about-us py-5">
   <div class="container">
-    <h2 class="section-title">About us</h2>
-    <p class="mb-4">
-      {!! $data->about_deskripsi ?? '<p>Bergabunglah di dunia rasa, nikmati sensasi dari roti dan kue terbaik.</p>' !!}
-    </p>
-    <a href="#" class="btn btn-outline-dark">Read More</a>
+    <div class="row align-items-center">
+      <div class="col-md-6">
+        <img src="{{ asset('images/bakery1.jpeg') }}" alt="Our Bakery" class="img-fluid rounded shadow" style="border: 5px solid #8A784E; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+      </div>
+      <div class="col-md-6 text-center text-md-start">
+        <h2 class="section-title" style="color: #3B3B1A;">Tentang Wijaya Bakery</h2>
+        <div class="mb-4" style="background-color: #E7EFC7; padding: 2rem; border-radius: 10px; border: 2px dashed #8A784E;">
+          {!! $data->about_deskripsi ?? '<p>Sejak 1990, Wijaya Bakery telah menghadirkan roti dan kue berkualitas tinggi dengan resep turun temurun. Kami menggunakan bahan-bahan pilihan dan dipanggang dengan penuh cinta untuk memberikan pengalaman rasa yang tak terlupakan.</p>' !!}
+        </div>
+        <a href="#" class="btn" style="background-color: #8A784E; color: white; border: none; padding: 0.75rem 1.5rem; font-weight: 600;">Lihat Selengkapnya</a>
+      </div>
+    </div>
   </div>
 </section>
 
 
 <!-- Explore More -->
-<section id="menu" class="py-5 text-center">
+<section id="menu" class="py-5" style="background-color: #E7EFC7;">
   <div class="container">
-    <h2 class="section-title">Explore More</h2>
-    <ul class="nav justify-content-center mb-4">
-      <li class="nav-item"><a class="nav-link active" href="#">Cake</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Muffins</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Croissant</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Bread</a></li>
-      <li class="nav-item"><a class="nav-link" href="#">Toast</a></li>
-    </ul>
+    <div class="text-center mb-5">
+      <h2 class="section-title" style="color: #3B3B1A;">Jelajahi Menu Kami</h2>
+      <p class="lead" style="color: #8A784E;">Pilih dari berbagai macam roti dan kue lezat kami</p>
+    </div>
+    
     <div class="row g-4">
       @forelse ($menus as $menu)
       <div class="col-sm-6 col-md-4 col-lg-3">
-              <div class="card h-100 border-0 shadow-sm hover-shadow">
-                  <img src="{{ $menu->gambar_menu ? asset('uploads/menu/' . $menu->gambar_menu) : asset('image/default.jpg') }}"
-                       class="card-img-top rounded-top"
-                       alt="{{ $menu->nama_menu }}"
-                       style="height: 230px; object-fit: cover;">
-                  <div class="card-body d-flex flex-column">
-                      <h5 class="card-title fw-bold text-dark">{{ $menu->nama_menu }}</h5>
-                      <p class="card-text text-muted mb-4">{{ \Illuminate\Support\Str::limit($menu->deskripsi_menu, 80) }}</p>
-                  </div>
-              </div>
+        <div class="card h-100 border-0 shadow" style="border-radius: 15px; overflow: hidden; transition: transform 0.3s; border: 2px solid #8A784E;">
+          <div style="overflow: hidden; height: 230px;">
+            <img src="{{ $menu->gambar_menu ? asset('uploads/menu/' . $menu->gambar_menu) : asset('image/default.jpg') }}"
+                 class="card-img-top w-100 h-100"
+                 alt="{{ $menu->nama_menu }}"
+                 style="object-fit: cover; transition: transform 0.5s;">
           </div>
+          <div class="card-body d-flex flex-column" style="background-color: #AEC8A4;">
+            <h5 class="card-title fw-bold" style="color: #3B3B1A;">{{ $menu->nama_menu }}</h5>
+            <p class="card-text mb-3" style="color: #3B3B1A;">{{ \Illuminate\Support\Str::limit($menu->deskripsi_menu, 80) }}</p>
+            <div class="mt-auto">
+              <button class="btn w-100" style="background-color: #8A784E; color: white; border: none; font-weight: 600;">Lihat Detail</button>
+            </div>
+          </div>
+        </div>
+      </div>
       @empty
           <div class="col">
-              <div class="alert alert-info text-center w-100">
+              <div class="alert alert-info text-center w-100" style="background-color: #AEC8A4; color: #3B3B1A; border: 1px solid #8A784E;">
                   Belum ada menu yang tersedia.
               </div>
           </div>
       @endforelse
-  </div>
+    </div>
   </div>
 </section>
 
@@ -199,31 +262,91 @@
 
 
 <!-- Kontak -->
-<section id="contact" class="contact-us py-5 text-center bg-light">
+<section id="contact" class="py-5" style="background-color: var(--sage);">
   <div class="container">
-    <h2 class="section-title">Kontak Kami</h2>
-    <div class="mb-4">
-      {!! $data->contact_deskripsi ?? '<p>Silakan hubungi kami untuk pemesanan atau informasi lebih lanjut mengenai produk roti dan kue terbaik dari Wijaya Bakery.</p>' !!}
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <h2 class="section-title">Hubungi Kami</h2>
+        <p class="lead mb-5">Punya pertanyaan atau pesanan khusus? Kami siap membantu!</p>
+      </div>
     </div>
-    <a href="mailto:info@wijayabakery.com" class="btn btn-outline-primary">Hubungi Kami</a>
+    
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="card h-100 border-0 shadow" style="background-color: var(--cream); border-radius: 15px;">
+          <div class="card-body p-4">
+            <h4 class="mb-4" style="color: var(--dark-brown);">Informasi Kontak</h4>
+            <ul class="list-unstyled">
+              <li class="mb-3">
+                <i class="bi bi-geo-alt-fill me-2" style="color: var(--brown);"></i>
+                Jl. Roti Manis No.12, Malang
+              </li>
+              <li class="mb-3">
+                <i class="bi bi-telephone-fill me-2" style="color: var(--brown);"></i>
+                (0341) 123-456
+              </li>
+              <li class="mb-3">
+                <i class="bi bi-envelope-fill me-2" style="color: var(--brown);"></i>
+                info@wijayabakery.com
+              </li>
+              <li class="mb-3">
+                <i class="bi bi-clock-fill me-2" style="color: var(--brown);"></i>
+                Buka setiap hari 08:00 - 20:00
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 mb-4">
+        <div class="card h-100 border-0 shadow" style="background-color: var(--cream); border-radius: 15px;">
+          <div class="card-body p-4">
+            <h4 class="mb-4" style="color: var(--dark-brown);">Kirim Pesan</h4>
+            <form>
+              <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Nama Anda" style="border-color: var(--brown);">
+              </div>
+              <div class="mb-3">
+                <input type="email" class="form-control" placeholder="Email Anda" style="border-color: var(--brown);">
+              </div>
+              <div class="mb-3">
+                <textarea class="form-control" rows="4" placeholder="Pesan Anda" style="border-color: var(--brown);"></textarea>
+              </div>
+              <button type="submit" class="btn w-100" style="background-color: var(--brown); color: white;">Kirim Pesan</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- Sponsor List -->
 @if($sponsors->count())
-<section id="sponsors" class="py-5 text-center about-us">
+<section id="sponsors" class="py-5" style="background-color: var(--cream);">
   <div class="container">
-    <h2 class="section-title">Sponsor Kami</h2>
+    <div class="text-center mb-5">
+      <h2 class="section-title">Partner Kami</h2>
+      <p class="lead">Berkolaborasi dengan brand-brand terbaik</p>
+    </div>
+    
     <div class="row justify-content-center g-4">
       @foreach($sponsors as $sponsor)
       <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-        <div class="card border-0 bg-transparent">
-          @if($sponsor->logo_sponsor)
-            <img src="{{ asset('uploads/sponsor/' . $sponsor->logo_sponsor) }}" class="img-fluid rounded" alt="{{ $sponsor->nama_sponsor }}">
-          @else
-            <div class="bg-secondary text-white rounded py-4">No Logo</div>
-          @endif
-          {{-- <div class="mt-2 small text-muted">{{ $sponsor->nama_sponsor }}</div> --}}
+        <div class="card h-100 border-0 shadow-sm" style="background-color: white; border-radius: 15px; transition: transform 0.3s;">
+          <div class="card-body d-flex align-items-center justify-content-center p-3">
+            @if($sponsor->logo_sponsor)
+              <img src="{{ asset('uploads/sponsor/' . $sponsor->logo_sponsor) }}" 
+                   class="img-fluid" 
+                   alt="{{ $sponsor->nama_sponsor }}"
+                   style="max-height: 80px; width: auto; filter: grayscale(100%) opacity(80%); transition: filter 0.3s;">
+            @else
+              <div class="text-center py-3" style="color: var(--brown);">
+                <i class="bi bi-building" style="font-size: 2rem;"></i>
+                <div class="mt-2 small">{{ $sponsor->nama_sponsor }}</div>
+              </div>
+            @endif
+          </div>
         </div>
       </div>
       @endforeach
@@ -232,48 +355,83 @@
 </section>
 @endif
 <!-- Footer -->
-<footer class="footer py-4 text-white" style="background-color:#3c2f2f">
+<footer class="footer py-5 text-white" style="background-color: #3B3B1A;">
   <div class="container">
-    <div class="row">
-      <!-- About Us -->
-      <div class="col-md-4 mb-3">
-        <h5>About Us</h5>
-        <p>
-          Telp: (0341) 123-456<br>
-          Alamat: Jl. Roti Manis No.12<br>
-          Email: wijaya@bakery.com
+    <div class="row g-4">
+      <!-- Contact Info -->
+      <div class="col-lg-4 mb-4">
+        <div class="d-flex align-items-center mb-3">
+          <img src="{{ asset('image/logo1.png') }}" alt="Wijaya Bakery Logo" width="40" height="40" class="me-2">
+          <h4 class="m-0" style="font-family: 'Pacifico', cursive;">Wijaya Bakery</h4>
+        </div>
+        <p class="mb-3">
+          <i class="bi bi-geo-alt-fill me-2"></i>
+          Jl. Roti Manis No.12, Malang
         </p>
+        <p class="mb-3">
+          <i class="bi bi-telephone-fill me-2"></i>
+          (0341) 123-456
+        </p>
+        <p class="mb-3">
+          <i class="bi bi-envelope-fill me-2"></i>
+          info@wijayabakery.com
+        </p>
+        <div class="social-icons mt-4">
+          <a href="#" class="text-white me-3"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="text-white me-3"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="text-white me-3"><i class="bi bi-twitter-x"></i></a>
+        </div>
       </div>
 
-      <!-- Recent News -->
-      <div class="col-md-4 mb-3">
-        <h5>Recent News</h5>
-        <p>
-          - Roti pastry edisi baru<br>
-          - Tart pastry cita rasa unik
-        </p>
+      <!-- Opening Hours -->
+      <div class="col-lg-4 mb-4">
+        <h5 class="mb-4">Jam Operasional</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2 d-flex justify-content-between">
+            <span>Senin - Jumat</span>
+            <span>08:00 - 20:00</span>
+          </li>
+          <li class="mb-2 d-flex justify-content-between">
+            <span>Sabtu - Minggu</span>
+            <span>09:00 - 22:00</span>
+          </li>
+        </ul>
+        <div class="mt-4">
+          <h5 class="mb-3">Produk Terbaru</h5>
+          <div class="d-flex mb-3">
+            <img src="{{ asset('images/bakery1.jpeg') }}" alt="New Product" width="80" class="rounded me-3">
+            <div>
+              <h6 class="mb-1">Roti Sourdough</h6>
+              <small>Dibuat dengan ragi alami</small>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Google Maps -->
-      <div class="col-md-4 mb-3">
-        <h5>Lokasi Kami</h5>
-        <div style="border-radius: 10px; overflow: hidden;">
+      <div class="col-lg-4 mb-4">
+        <h5 class="mb-3">Lokasi Kami</h5>
+        <div class="ratio ratio-16x9 rounded overflow-hidden shadow">
           <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31660.44115470185!2d112.71922230720519!3d-7.291346199559281!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fbbe1837258d%3A0x6de4060b6596563f!2sTaman%20Bungkul!5e0!3m2!1sid!2sid!4v1750739264134!5m2!1sid!2sid" 
-          width="400" 
-          height="300" 
-          style="border:0;" 
-          allowfullscreen="" 
-          loading="lazy" 
-          referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31660.44115470185!2d112.71922230720519!3d-7.291346199559281!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fbbe1837258d%3A0x6de4060b6596563f!2sTaman%20Bungkul!5e0!3m2!1sid!2sid!4v1750739264134!5m2!1sid!2sid" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
         </div>
       </div>
     </div>
 
+    <hr class="mt-4 mb-4" style="border-color: rgba(255,255,255,0.1);">
+
     <!-- Copyright -->
-    <div class="text-center mt-3">
-      <small>&copy; 2025 Wijaya Bakery. All rights reserved.</small>
+    <div class="text-center pt-2">
+      <p class="mb-0">
+        &copy; 2025 Wijaya Bakery. All rights reserved. | 
+        <a href="#" class="text-white text-decoration-none">Privacy Policy</a> | 
+        <a href="#" class="text-white text-decoration-none">Terms of Service</a>
+      </p>
     </div>
   </div>
 </footer>
@@ -305,4 +463,3 @@
 
 </body>
 </html>
-        

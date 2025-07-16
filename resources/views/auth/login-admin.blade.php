@@ -47,7 +47,7 @@
         <div class="text-center mb-4 d-md-none">
           <img src="{{ asset('image/logo1.png') }}" alt="Logo Dapur Indonesia" style="max-height: 80px;">
         </div>
-        <h4 class="text-brown mb-3 text-center">Login Admin</h4>
+        <h4 class="text-brown mb-3 text-center">Login Owner</h4>
 
         @if(session('error'))
           <div class="alert alert-danger">{{ session('error') }}</div>
