@@ -17,7 +17,6 @@ Route::get('/', function () {
 });
 Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 // Route::get('/homepage', [HomepageController::class, 'index']);
-
 // Route::get('/home', [HomeController::class, 'index']);
 // Route::get('/login-user', [AuthController::class, 'showUserLoginForm'])->name('login-user');
 // Route::post('/login-user', [AuthController::class, 'userLogin']);
